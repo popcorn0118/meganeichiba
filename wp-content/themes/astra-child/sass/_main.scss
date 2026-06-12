@@ -1,0 +1,17 @@
+@use 'mixin' as *;
+
+// 自訂樣式
+
+body {
+//   font-family: 'IBM Plex Mono', 'Noto Sans TC', sans-serif;
+//   * {
+//       font-family: 'IBM Plex Mono', 'Noto Sans TC', sans-serif;
+
+//   }
+}
+
+.btn {
+    .elementor-button-icon i {
+        font-size: 18px;
+    }
+}

@@ -9,8 +9,5 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: astra-child
 Template: astra
 */
-.btn .elementor-button-icon i {
-  font-size: 18px;
-}
 
-/*# sourceMappingURL=style.css.map */
+@use 'sass/main' as *;

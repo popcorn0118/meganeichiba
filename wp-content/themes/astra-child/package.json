@@ -1,0 +1,11 @@
+{
+  "name": "astra-child",
+  "version": "1.0.0",
+  "scripts": {
+    "watch": "sass style.scss style.css --watch --source-map",
+    "build": "sass style.scss style.css --style=compressed --no-source-map"
+  },
+  "devDependencies": {
+    "sass": "^1.77.0"
+  }
+}

@@ -1,0 +1,189 @@
+@use 'sass:string';
+
+$xxl: 1400px;
+$xl: 1200px;
+$lg: 1024px;
+$ml: 921px;
+$md: 768px;
+$sm: 576px;
+$xs: 360px;
+
+@mixin xxl(){
+	@media screen and (max-width: $xxl){
+		@content;
+	}
+}
+@mixin xl(){
+	@media screen and (max-width: $xl){
+		@content;
+	}
+}
+@mixin lg(){
+	@media screen and (max-width: $lg){
+		@content;
+
+	}
+
+}
+@mixin ml(){
+	@media screen and (max-width: $ml){
+		@content;
+	}
+}
+@mixin md(){
+	@media screen and (max-width: $md){
+		@content;
+	}
+}
+@mixin sm(){
+	@media screen and (max-width: $sm){
+		@content;
+	}
+}
+@mixin xs(){
+	@media screen and (max-width: $xs){
+		@content;
+	}
+}
+@mixin word-count($num) {
+  display:-webkit-box;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  -webkit-line-clamp: $num; // 想顯示的行數
+  -webkit-box-orient: vertical;
+}
+
+@mixin arrow($direction, $color, $size) {
+  content: '';
+  width: $size;
+  height: $size;
+  border-radius: 3px;
+  border-right: 3px solid $color;
+  border-bottom: 3px solid $color;
+  display: inline-block;
+  @if $direction == top {
+    transform: rotate(-135deg);
+  } @else if $direction == right {
+    transform: rotate(-45deg);
+  } @else if $direction == bottom {
+    transform: rotate(45deg);
+  } @else if $direction == left {
+    transform: rotate(135deg);
+  } @else {
+    transform: rotate(-135deg);
+  }
+}
+
+//線條漸層
+@mixin borderGradient($direction, $color-1, $color-2) {
+  border: 1px solid transparent;
+  border-block-start: 1px solid transparent !important;
+  border-image-slice: 1 !important;
+  border-image: linear-gradient(to $direction, $color-1 30%, $color-2 100%);
+}
+//文字漸層
+@mixin textGradient($direction, $color-1, $color-2) {
+  background: linear-gradient(to $direction, $color-1, $color-2);
+  background: -webkit-linear-gradient(to $direction, $color-1, $color-2);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+//背景漸層
+@mixin bgGradient(
+  $color-1,
+  $color-2,
+  $type: linear,
+  $direction: to bottom
+) {
+  @if $type == radial {
+    background: radial-gradient($direction, $color-1, $color-2);
+    // background: -webkit-radial-gradient($direction, $color-1, $color-2);
+  } @else {
+    background: linear-gradient($direction, $color-1, $color-2);
+    // background: -webkit-linear-gradient($direction, $color-1, $color-2);
+  }
+}
+
+@mixin bg-btn() {
+  border-radius: 16px;
+  background-color: var( --text-w );
+  box-shadow: 2px 5px 8px 0 rgba(0, 0, 0, 0.08);
+  padding: 10px 5px;
+  // width: 100%;
+  text-align: center;
+  display: flex;
+}
+@mixin btn(
+  $color: var( --primary ),
+  $bg: transparent,
+  $border: var( --primary ),
+  $color-h: var( --text-w ),
+  $bg-h: var( --primary ),
+  $border-h: var( --primary )
+) {
+  color: $color;
+  border-radius: 80px;
+  background-color: $bg;
+  padding: 10px 30px;
+  border: 1px solid $border;
+  text-align: center;
+  display: flex;
+  font-size: 16px;
+  &:hover {
+    color: $color-h;
+    background-color: $bg-h;
+    border: 1px solid $border-h;
+  }
+}
+
+@mixin blur($blur) {
+  backdrop-filter: blur($blur) !important;
+  -webkit-backdrop-filter: blur($blur) !important;
+}
+
+@mixin bg-img($url) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+// rgba()使用轉換
+@function rgba-var($css-var, $alpha) {
+  @return string.unquote("rgb(from #{$css-var} r g b / #{$alpha})");
+  // 也可用：unquote("rgba(var(#{$css-var}), #{$alpha})")
+}
+
+//input專用, 在input選取提示的常用關鍵字後的樣式
+@mixin autofill($text-color, $bg-color) {
+  /* Chrome, Edge, Safari (WebKit) */
+  &:-webkit-autofill {
+    background-color: transparent !important;
+    box-shadow: 0 0 0px 1000px $bg-color inset !important; /* 讓背景恢復正常 */
+    -webkit-text-fill-color: $text-color !important; /* 確保文字顏色正常 */
+  }
+
+  /* Firefox */
+  &:-moz-autofill {
+    background-color: transparent !important;
+  }
+
+  /* 覆蓋 Edge */
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    background-color: transparent !important;
+    box-shadow: 0 0 0px 1000px $bg-color inset !important;
+    -webkit-text-fill-color: $text-color !important;
+  }
+}
+
+@mixin shadow($shadow: 5px 5px 20px 0px rgba-var(var( --primary ), 0.8), $shadow-h: 0 0 0 0 transparent) {
+  box-shadow: $shadow !important;
+  transition: 0.4s;
+  &:hover {
+    box-shadow: $shadow-h !important;
+    transition: 0.4s;
+  }
+}
