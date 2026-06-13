@@ -1,3 +1,4 @@
+@use 'variable' as *;
 @use 'mixin' as *;
 
 // 自訂樣式
@@ -8,10 +9,54 @@ body {
 //       font-family: 'IBM Plex Mono', 'Noto Sans TC', sans-serif;
 
 //   }
+    &.translatepress-zh_TW {
+
+    }
+    &.translatepress-en_US {
+
+    }
+    &.translatepress-ja {
+        
+    }
 }
 
 .btn {
     .elementor-button-icon i {
         font-size: 18px;
+    }
+}
+
+//語系切換
+.trp-shortcode-switcher__wrapper {
+    line-height: 1;
+    
+    
+    .trp-shortcode-switcher {
+        padding: 0;
+    }
+    .trp-flag-image {
+        display: none !important;
+    }
+    
+    // .trp-language-item-name {
+    //     @include sm() {
+    //         display: none;
+    //     }
+    // }
+}
+@include sm() {
+    .ast-builder-layout-element.ast-flex.site-header-focus-item.ast-header-html-2 {
+        padding-right: 0;
+    }
+    .ast-builder-grid-row {
+        grid-column-gap: 10px;
+    }
+    .trp-current-language-item__wrapper:not(.trp-hide-arrow) {
+        padding-right: 4px !important;
+        letter-spacing: 0;
+    }
+    .trp-language-item {
+         padding: 7px 8px;
+        
     }
 }

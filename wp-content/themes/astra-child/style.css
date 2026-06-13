@@ -9,8 +9,136 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: astra-child
 Template: astra
 */
+:root {
+  --primary: var( --e-global-color-astglobalcolor1 );
+  --primary-h: #333333b3;
+  --text: var( --e-global-color-astglobalcolor1 );
+  --bg: var( --e-global-color-astglobalcolor4 );
+}
+
 .btn .elementor-button-icon i {
   font-size: 18px;
+}
+
+.trp-shortcode-switcher__wrapper {
+  line-height: 1;
+}
+.trp-shortcode-switcher__wrapper .trp-shortcode-switcher {
+  padding: 0;
+}
+.trp-shortcode-switcher__wrapper .trp-flag-image {
+  display: none !important;
+}
+
+@media screen and (max-width: 576px) {
+  .ast-builder-layout-element.ast-flex.site-header-focus-item.ast-header-html-2 {
+    padding-right: 0;
+  }
+  .ast-builder-grid-row {
+    grid-column-gap: 10px;
+  }
+  .trp-current-language-item__wrapper:not(.trp-hide-arrow) {
+    padding-right: 4px !important;
+    letter-spacing: 0;
+  }
+  .trp-language-item {
+    padding: 7px 8px;
+  }
+}
+.products-brand-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 100px 80px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+@media screen and (max-width: 576px) {
+  .products-brand-list {
+    grid-template-columns: 1fr;
+    gap: 80px;
+  }
+}
+
+.brand-card {
+  text-align: center;
+}
+
+.brand-card-image {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1/1;
+  background: #efefef;
+}
+.brand-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+.brand-card-image:hover img {
+  transform: scale(1.05);
+}
+
+.brand-card-coming-soon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  color: #555;
+}
+
+.brand-card-logo {
+  margin-top: 40px;
+}
+.brand-card-logo img {
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.brand-card-title {
+  margin-top: 40px;
+  font-size: 2rem;
+  letter-spacing: 0.12em;
+}
+
+.brand-card-desc {
+  margin-top: 20px;
+  line-height: 1.8;
+  font-size: 20px;
+}
+@media screen and (max-width: 768px) {
+  .brand-card-desc {
+    font-size: 18px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .brand-card-desc {
+    font-size: 16px;
+  }
+}
+
+.brand-card-button {
+  font-family: "IBM Plex Mono";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+  padding-bottom: 0px;
+  font-size: 16px;
+  border-bottom: 1px solid currentColor;
+  transition: opacity 0.3s ease;
+}
+.brand-card-button i {
+  margin-right: 10px;
+}
+.brand-card-button:hover {
+  opacity: 0.7;
 }
 
 /*# sourceMappingURL=style.css.map */

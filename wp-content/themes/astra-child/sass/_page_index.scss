@@ -1,0 +1,99 @@
+@use 'variable' as *;
+@use 'mixin' as *;
+
+// 商品品牌列表
+.products-brand-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 100px 80px;
+    max-width: 1000px;
+    margin: 0 auto;
+
+    @include sm() {
+        grid-template-columns: 1fr;
+        gap: 80px;
+    }
+}
+
+.brand-card {
+    text-align: center;
+}
+
+.brand-card-image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    background: #efefef;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+
+        transition: transform .6s ease;
+    }
+
+    &:hover img {
+        transform: scale(1.05);
+    }
+}
+
+.brand-card-coming-soon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    letter-spacing: .08em;
+    color: #555;
+}
+
+.brand-card-logo {
+    margin-top: 40px;
+
+    img {
+        width: auto;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+.brand-card-title {
+    margin-top: 40px;
+    font-size: 2rem;
+    letter-spacing: .12em;
+}
+
+.brand-card-desc {
+    margin-top: 20px;
+    line-height: 1.8;
+    font-size: 20px;
+    @include md() {
+        font-size: 18px;
+    }
+    @include sm() {
+        font-size: 16px;
+    }
+}
+
+.brand-card-button {
+    font-family: 'IBM Plex Mono';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    padding-bottom: 0px;
+    font-size: 16px;
+    // text-transform: uppercase;
+    border-bottom: 1px solid currentColor;
+    transition: opacity .3s ease;
+    i {
+        margin-right: 10px;
+    }
+    &:hover {
+        opacity: .7;
+    }
+}
