@@ -46,41 +46,6 @@ Template: astra
     padding: 7px 8px;
   }
 }
-.elementor-widget-image-box.custom .elementor-image-box-title {
-  position: relative;
-}
-.elementor-widget-image-box.custom .elementor-image-box-title::after {
-  content: "";
-  width: 100%;
-  height: 1px;
-  border-bottom: 1px solid var(--primary);
-  display: block;
-  position: absolute;
-  bottom: 15px;
-  left: 0;
-}
-@media screen and (max-width: 768px) {
-  .elementor-widget-image-box.custom .elementor-image-box-title::after {
-    bottom: 10px;
-  }
-}
-.elementor-widget-image-box.custom .elementor-image-box-img {
-  margin-bottom: 0 !important;
-}
-@media screen and (max-width: 768px) {
-  .elementor-widget-image-box.custom .elementor-image-box-img {
-    margin-bottom: 30px !important;
-  }
-}
-.elementor-widget-image-box.custom.quality .elementor-image-box-title::after {
-  bottom: 6px;
-}
-@media screen and (max-width: 768px) {
-  .elementor-widget-image-box.custom.quality .elementor-image-box-title::after {
-    bottom: 4px;
-  }
-}
-
 .products-brand-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
