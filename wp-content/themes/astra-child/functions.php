@@ -24,6 +24,33 @@ function child_enqueue_styles() {
 
 add_action( 'wp_enqueue_scripts', 'child_enqueue_styles', 15 );
 
+/**
+ * 品牌列表頁 (taxonomy-product_brand) 專用腳本
+ */
+function child_enqueue_brand_archive_scripts() {
+
+    if ( ! is_tax( 'product_brand' ) ) {
+        return;
+    }
+
+    wp_enqueue_script(
+        'astra-child-brand-archive',
+        get_stylesheet_directory_uri() . '/assets/js/brand-archive.js',
+        [ 'jquery' ],
+        CHILD_THEME_ASTRA_CHILD_VERSION,
+        true
+    );
+
+    wp_localize_script( 'astra-child-brand-archive', 'BrandArchive', [
+        'ajax_url' => admin_url( 'admin-ajax.php' ),
+        'nonce'    => wp_create_nonce( 'brand_lineup_nonce' ),
+    ] );
+}
+
+add_action( 'wp_enqueue_scripts', 'child_enqueue_brand_archive_scripts' );
+
+require_once get_stylesheet_directory() . '/inc/ajax-brand-lineup.php';
+
 
 // 將 ACF「品牌狀態」顯示於 WooCommerce Brands 後台列表
 add_filter( 'manage_edit-product_brand_columns', function( $columns ) {

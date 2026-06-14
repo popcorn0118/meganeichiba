@@ -1,0 +1,298 @@
+@use 'variable' as *;
+@use 'mixin' as *;
+
+// ==========================================================================
+// 品牌列表頁 (taxonomy-product_brand)
+// ==========================================================================
+
+// 品牌列表頁滿版：移除 .ast-container 的寬度限制，讓 .brand-hero 可以滿版
+.tax-product_brand .ast-container {
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+// 品牌主視覺
+.brand-hero {
+    position: relative;
+    margin-bottom: 60px;
+
+    @include md() {
+        margin-bottom: 40px;
+    }
+}
+.brand-logo {
+    position: absolute;
+    left: 30px;
+    bottom: 50px;
+}
+.brand-hero-img {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    @include md() {
+        aspect-ratio: 4 / 3;
+    }
+}
+
+.brand-hero-name {
+    position: absolute;
+    left: 40px;
+    bottom: 30px;
+    margin: 0;
+    font-size: 2.5rem;
+    letter-spacing: .3em;
+    color: #fff;
+
+    @include sm() {
+        left: 20px;
+        bottom: 15px;
+        font-size: 1.5rem;
+    }
+}
+
+// 品牌介紹
+.brand-intro {
+    max-width: 800px;
+    margin: 0 auto 80px;
+    padding: 0 20px;
+    text-align: center;
+
+    @include md() {
+        margin-bottom: 50px;
+    }
+}
+
+.brand-intro-title {
+    margin-bottom: 30px;
+    font-size: 1.75rem;
+    letter-spacing: .08em;
+
+    @include sm() {
+        font-size: 1.4rem;
+    }
+}
+
+.brand-intro-sub {
+    font-size: 16px;
+    line-height: 2;
+    color: var(--primary-h);
+}
+
+// DETAIL
+.brand-detail {
+    margin-bottom: 80px;
+    padding: 60px 20px;
+    background: #f5f5f5;
+
+    @include md() {
+        margin-bottom: 50px;
+        padding: 40px 16px;
+    }
+}
+
+.brand-detail-title {
+    margin-bottom: 50px;
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: .3em;
+    text-align: center;
+}
+
+.brand-detail-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.brand-detail-item {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 30px;
+    align-items: center;
+    background: #fff;
+
+    @include md() {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+.brand-detail-img {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+}
+
+.brand-detail-desc {
+    padding: 20px 30px;
+    font-size: 15px;
+    line-height: 1.8;
+
+    @include md() {
+        padding: 0 20px 20px;
+    }
+}
+
+// LINEUP
+.brand-lineup {
+    max-width: 1200px;
+    margin: 0 auto 80px;
+    padding: 0 20px;
+}
+
+.brand-lineup-title {
+    margin-bottom: 40px;
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: .3em;
+    text-align: center;
+}
+
+.brand-lineup-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-bottom: 40px;
+
+    @include sm() {
+        gap: 30px;
+    }
+}
+
+.brand-lineup-tab {
+    padding: 0 0 8px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: none;
+    color: var(--primary-h);
+    font-size: 18px;
+    letter-spacing: .15em;
+    cursor: pointer;
+    transition: color .3s ease, border-color .3s ease;
+
+    &.active,
+    &:hover {
+        color: var(--primary);
+        border-bottom-color: var(--primary);
+    }
+}
+
+.brand-lineup-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px 30px;
+    transition: opacity .3s ease;
+
+    &.is-loading {
+        opacity: .4;
+        pointer-events: none;
+    }
+
+    @include md() {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px 20px;
+    }
+
+    @include sm() {
+        grid-template-columns: 1fr;
+    }
+}
+
+// LINEUP 商品卡
+.lineup-card-images {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #f5f5f5;
+}
+
+.lineup-card-image {
+    display: none;
+    width: 100%;
+    height: 100%;
+
+    &.active {
+        display: block;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+    }
+}
+
+.lineup-card-dots {
+    position: absolute;
+    right: 0;
+    bottom: 12px;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+.lineup-card-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #ccc;
+    cursor: pointer;
+    transition: background-color .3s ease;
+
+    &.active {
+        background: var(--primary);
+    }
+}
+
+.lineup-card-title {
+    margin-top: 20px;
+    font-size: 16px;
+    letter-spacing: .05em;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover {
+            opacity: .7;
+        }
+    }
+}
+
+.lineup-card-desc {
+    @include word-count(2);
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--primary-h);
+
+    p {
+        margin: 0;
+    }
+}
+
+.lineup-card-price {
+    margin-top: 10px;
+    font-size: 15px;
+}
