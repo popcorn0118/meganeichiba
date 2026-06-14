@@ -1,0 +1,86 @@
+@use 'variable' as *;
+@use 'mixin' as *;
+
+.elementor-widget-image-box.company-characteristics {
+    .elementor-image-box-title {
+        position: relative;
+
+        &::after {
+            content: '';
+            width: 100%;
+            height: 1px;
+            border-bottom: 1px solid var(--primary);
+            display: block;
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            @include md() {
+                bottom: 10px;
+            }
+        }
+    }
+    .elementor-image-box-img {
+        margin-bottom: 0 !important;
+        @include md() {
+            margin-bottom: 30px !important;
+        }
+    }
+    &.quality {
+        .elementor-image-box-title {
+            &::after {
+                bottom: 6px;
+                @include md() {
+                    bottom: 4px;
+                }
+            }
+        }
+    }
+}
+
+.company-profile {
+   
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    table,
+    tr,
+    th,
+    td {
+        border: 0;
+    }
+    tr {
+        @include md() {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+    }
+
+
+    th {
+        width: 32%;
+        font-weight: 500;
+        text-align: center;
+        text-align: right;
+        @include md() {
+            &::after {
+                content:'：';
+            }
+        }
+    }
+
+    td {
+        width: 68%;
+        text-align: left;
+    }
+    th, td {
+        vertical-align: top;
+        @include md() {
+            width: 100%;
+            text-align: left;
+            padding: 0 0;
+        }
+    }
+   
+}
