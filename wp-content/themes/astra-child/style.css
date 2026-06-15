@@ -438,7 +438,7 @@ Template: astra
 .brand-lineup-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 50px 30px;
+  gap: 50px 50px;
   transition: opacity 0.3s ease;
 }
 .brand-lineup-grid.is-loading {
@@ -483,25 +483,28 @@ Template: astra
 .lineup-card-dots {
   position: absolute;
   right: 0;
-  bottom: 12px;
+  bottom: 0;
   left: 0;
   display: flex;
   justify-content: center;
-  gap: 6px;
+  gap: 12px;
 }
 
 .lineup-card-dot {
-  width: 8px;
-  height: 8px;
+  width: 16px;
+  height: 16px;
   padding: 0;
   border: none;
   border-radius: 50%;
-  background: #ccc;
+  background: var(--dot-color, #ccc);
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: box-shadow 0.3s ease;
+}
+.lineup-card-dot:hover, .lineup-card-dot:focus {
+  background: var(--dot-color, #ccc);
 }
 .lineup-card-dot.active {
-  background: var(--primary);
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--dot-color, var(--primary));
 }
 
 .lineup-card-title {
@@ -518,18 +521,12 @@ Template: astra
 }
 
 .lineup-card-desc {
-  display: -webkit-box;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
   margin-top: 10px;
-  font-size: 13px;
   line-height: 1.8;
-  color: var(--primary-h);
 }
 .lineup-card-desc p {
   margin: 0;
+  word-break: break-all;
 }
 
 .lineup-card-price {

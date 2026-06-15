@@ -205,7 +205,7 @@
 .brand-lineup-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 50px 30px;
+    gap: 50px 50px;
     transition: opacity .3s ease;
 
     &.is-loading {
@@ -254,25 +254,27 @@
 .lineup-card-dots {
     position: absolute;
     right: 0;
-    bottom: 12px;
+    bottom: 0;
     left: 0;
     display: flex;
     justify-content: center;
-    gap: 6px;
+    gap: 12px;
 }
 
 .lineup-card-dot {
-    width: 8px;
-    height: 8px;
+    width: 16px;
+    height: 16px;
     padding: 0;
     border: none;
     border-radius: 50%;
-    background: #ccc;
+    background: var(--dot-color, #ccc);
     cursor: pointer;
-    transition: background-color .3s ease;
-
+    transition: box-shadow .3s ease;
+    &:hover, &:focus {
+        background: var(--dot-color, #ccc);
+    }
     &.active {
-        background: var(--primary);
+        box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--dot-color, var(--primary));
     }
 }
 
@@ -292,14 +294,12 @@
 }
 
 .lineup-card-desc {
-    @include word-count(2);
     margin-top: 10px;
-    font-size: 13px;
     line-height: 1.8;
-    color: var(--primary-h);
 
     p {
         margin: 0;
+        word-break: break-all;
     }
 }
 
