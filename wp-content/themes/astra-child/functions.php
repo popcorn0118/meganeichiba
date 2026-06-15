@@ -18,6 +18,14 @@ define( 'CHILD_THEME_ASTRA_CHILD_VERSION', '1.0.0' );
  */
 function child_enqueue_styles() {
 
+    //引入字型
+    wp_enqueue_style(
+		'google-fonts',
+		'https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&display=swap',
+		[],
+		null
+	);
+
 	wp_enqueue_style( 'astra-child-theme-css', get_stylesheet_directory_uri() . '/style.css', array('astra-theme-css'), CHILD_THEME_ASTRA_CHILD_VERSION, 'all' );
 
 }
@@ -88,4 +96,6 @@ add_filter( 'manage_product_brand_custom_column', function( $content, $column_na
     return $labels[ $status ] ?? '-';
 
 }, 10, 3 );
+
+
 

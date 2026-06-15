@@ -59,12 +59,6 @@ $default_cat    = $has_categories ? reset( $cat_terms )->slug : '';
     <?php if ( ! empty( $banner_img['url'] ) ) : ?>
 
         <section class="brand-hero">
-            <div class="brand-logo">
-                <img
-                    src="<?= esc_url( $brand_logo['url'] ); ?>"
-                    alt="<?= esc_attr( $term->name ); ?>"
-                >
-            </div>
             <div class="brand-hero-img">
                 <img
                     src="<?= esc_url( $banner_img['url'] ); ?>"
@@ -80,7 +74,7 @@ $default_cat    = $has_categories ? reset( $cat_terms )->slug : '';
         <section class="brand-intro">
 
             <?php if ( $title ) : ?>
-                <h2 class="brand-intro-title"><?= esc_html( $title ); ?></h2>
+                <h1 class="brand-intro-title Noto-Serif-JP"><?= esc_html( $title ); ?></h1>
             <?php endif; ?>
 
             <?php if ( $title_sub ) : ?>
