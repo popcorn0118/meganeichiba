@@ -83,12 +83,13 @@
 .brand-detail {
     padding: 120px 10%;
     background: var(--bg);
-
+    margin-bottom: 120px;
     @include xl() {
         padding: 120px 6%;
     }
     @include md() {
         padding: 80px 6%;
+        margin-bottom: 80px;
     }
 }
 
@@ -151,9 +152,9 @@
 .brand-lineup {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 120px 24px;
+    padding: 0 24px 120px 24px;
     @include md() {
-        padding: 80px 24px;
+        padding: 0 24px 80px 24px;
     }
 }
 
