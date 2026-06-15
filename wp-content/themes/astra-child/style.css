@@ -223,6 +223,12 @@ Template: astra
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
+.tax-product_brand .ast-container .brand-cont {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 6%;
+}
 
 .brand-hero {
   position: relative;
@@ -259,7 +265,7 @@ Template: astra
 }
 
 .brand-intro {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 120px 24px;
   text-align: center;
@@ -277,8 +283,8 @@ Template: astra
 
 .brand-detail {
   margin-bottom: 80px;
-  padding: 60px 20px;
-  background: #f5f5f5;
+  padding: 120px 24px;
+  background: var(--bg);
 }
 @media screen and (max-width: 768px) {
   .brand-detail {
@@ -288,11 +294,11 @@ Template: astra
 }
 
 .brand-detail-title {
-  margin-bottom: 50px;
+  margin-bottom: 50px !important;
   font-size: 1.5rem;
   font-weight: 400;
-  letter-spacing: 0.3em;
   text-align: center;
+  font-style: italic;
 }
 
 .brand-detail-list {
@@ -340,9 +346,9 @@ Template: astra
 }
 
 .brand-lineup {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto 80px;
-  padding: 0 20px;
+  padding: 0 24px;
 }
 
 .brand-lineup-title {
@@ -375,6 +381,12 @@ Template: astra
   letter-spacing: 0.15em;
   cursor: pointer;
   transition: color 0.3s ease, border-color 0.3s ease;
+  font-size: 28px;
+}
+@media screen and (max-width: 768px) {
+  .brand-lineup-tab {
+    font-size: 24px;
+  }
 }
 .brand-lineup-tab.active, .brand-lineup-tab:hover {
   color: var(--primary);
@@ -405,9 +417,6 @@ Template: astra
 
 .lineup-card-images {
   position: relative;
-  aspect-ratio: 1/1;
-  overflow: hidden;
-  background: #f5f5f5;
 }
 
 .lineup-card-image {

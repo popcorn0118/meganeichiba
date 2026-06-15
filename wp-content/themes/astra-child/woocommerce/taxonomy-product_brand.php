@@ -69,122 +69,121 @@ $default_cat    = $has_categories ? reset( $cat_terms )->slug : '';
 
     <?php endif; ?>
 
-    <?php if ( $title || $title_sub ) : ?>
+    <div class="brand-cont">
+        <?php if ( $title || $title_sub ) : ?>
 
-        <section class="brand-intro">
+            <section class="brand-intro">
 
-            <?php if ( $title ) : ?>
-                <h1 class="brand-intro-title Noto-Serif-JP"><?= esc_html( $title ); ?></h1>
-            <?php endif; ?>
+                <?php if ( $title ) : ?>
+                    <h1 class="brand-intro-title Noto-Serif-JP"><?= esc_html( $title ); ?></h1>
+                <?php endif; ?>
 
-            <?php if ( $title_sub ) : ?>
-                <div class="brand-intro-sub"><?= nl2br( esc_html( $title_sub ) ); ?></div>
-            <?php endif; ?>
+                <?php if ( $title_sub ) : ?>
+                    <div class="brand-intro-sub"><?= nl2br( esc_html( $title_sub ) ); ?></div>
+                <?php endif; ?>
 
-        </section>
-
-    <?php endif; ?>
-
-    <?php if ( $detail_show && ! empty( $detail ) ) : ?>
-
-        <section class="brand-detail">
-
-            <h2 class="brand-detail-title">DETAIL</h2>
-
-            <div class="brand-detail-list">
-
-                <?php foreach ( $detail as $row ) : ?>
-
-                    <div class="brand-detail-item">
-
-                        <?php if ( ! empty( $row['img']['url'] ) ) : ?>
-                            <div class="brand-detail-img">
-                                <img src="<?= esc_url( $row['img']['url'] ); ?>" alt="">
-                            </div>
-                        <?php endif; ?>
-
-                        <?php if ( ! empty( $row['desc'] ) ) : ?>
-                            <div class="brand-detail-desc"><?= nl2br( esc_html( $row['desc'] ) ); ?></div>
-                        <?php endif; ?>
-
-                    </div>
-
-                <?php endforeach; ?>
-
-            </div>
-
-        </section>
-
-    <?php endif; ?>
-
-    <section class="brand-lineup" data-brand-id="<?= esc_attr( $term->term_id ); ?>">
-
-        <h2 class="brand-lineup-title">LINEUP</h2>
-
-        <?php if ( $has_categories ) : ?>
-
-            <div class="brand-lineup-tabs">
-
-                <?php foreach ( $cat_terms as $i => $cat ) : ?>
-
-                    <button
-                        type="button"
-                        class="brand-lineup-tab<?= 0 === $i ? ' active' : ''; ?>"
-                        data-cat="<?= esc_attr( $cat->slug ); ?>"
-                    >
-                        <?= esc_html( $cat->name ); ?>
-                    </button>
-
-                <?php endforeach; ?>
-
-            </div>
+            </section>
 
         <?php endif; ?>
 
-        <div class="brand-lineup-grid">
+        <?php if ( $detail_show && ! empty( $detail ) ) : ?>
 
-            <?php
+            <section class="brand-detail">
 
-            $lineup_tax_query = [
-                'relation' => 'AND',
-                [
-                    'taxonomy' => 'product_brand',
-                    'field'    => 'term_id',
-                    'terms'    => $term->term_id,
-                ],
-            ];
+                <h2 class="brand-detail-title">DETAIL</h2>
 
-            if ( $has_categories ) {
-                $lineup_tax_query[] = [
-                    'taxonomy' => 'product_cat',
-                    'field'    => 'slug',
-                    'terms'    => $default_cat,
+                <div class="brand-detail-list">
+
+                    <?php foreach ( $detail as $row ) : ?>
+
+                        <div class="brand-detail-item">
+
+                            <?php if ( ! empty( $row['img']['url'] ) ) : ?>
+                                <div class="brand-detail-img">
+                                    <img src="<?= esc_url( $row['img']['url'] ); ?>" alt="">
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if ( ! empty( $row['desc'] ) ) : ?>
+                                <div class="brand-detail-desc"><?= nl2br( esc_html( $row['desc'] ) ); ?></div>
+                            <?php endif; ?>
+
+                        </div>
+
+                    <?php endforeach; ?>
+
+                </div>
+
+            </section>
+
+        <?php endif; ?>
+
+        <section class="brand-lineup" data-brand-id="<?= esc_attr( $term->term_id ); ?>">
+
+            <?php if ( !empty($has_categories) ) : ?>
+                <div class="brand-lineup-tabs">
+
+                    <?php foreach ( $cat_terms as $i => $cat ) : ?>
+
+                        <button
+                            type="button"
+                            class="brand-lineup-tab<?= 0 === $i ? ' active' : ''; ?>"
+                            data-cat="<?= esc_attr( $cat->slug ); ?>"
+                        >
+                            <?= esc_html( $cat->name ); ?>
+                        </button>
+
+                    <?php endforeach; ?>
+
+                </div>
+            <?php else: ?>
+                <h2 class="brand-lineup-title">LINEUP</h2>
+            <?php endif; ?>
+
+            <div class="brand-lineup-grid">
+
+                <?php
+
+                $lineup_tax_query = [
+                    'relation' => 'AND',
+                    [
+                        'taxonomy' => 'product_brand',
+                        'field'    => 'term_id',
+                        'terms'    => $term->term_id,
+                    ],
                 ];
-            }
 
-            $lineup_query = new WP_Query( [
-                'post_type'      => 'product',
-                'posts_per_page' => -1,
-                'tax_query'      => $lineup_tax_query,
-            ] );
+                if ( $has_categories ) {
+                    $lineup_tax_query[] = [
+                        'taxonomy' => 'product_cat',
+                        'field'    => 'slug',
+                        'terms'    => $default_cat,
+                    ];
+                }
 
-            if ( $lineup_query->have_posts() ) :
+                $lineup_query = new WP_Query( [
+                    'post_type'      => 'product',
+                    'posts_per_page' => -1,
+                    'tax_query'      => $lineup_tax_query,
+                ] );
 
-                while ( $lineup_query->have_posts() ) :
-                    $lineup_query->the_post();
-                    get_template_part( 'woocommerce/lineup-card' );
-                endwhile;
+                if ( $lineup_query->have_posts() ) :
 
-                wp_reset_postdata();
+                    while ( $lineup_query->have_posts() ) :
+                        $lineup_query->the_post();
+                        get_template_part( 'woocommerce/lineup-card' );
+                    endwhile;
 
-            endif;
+                    wp_reset_postdata();
 
-            ?>
+                endif;
 
-        </div>
+                ?>
 
-    </section>
+            </div>
 
+        </section>
+    </div>
 </div>
 
 <?php get_footer(); ?>
