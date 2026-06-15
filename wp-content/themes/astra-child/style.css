@@ -54,6 +54,10 @@ Template: astra
   font-family: "IBM Plex Mono";
 }
 
+#contact h2 {
+  margin-bottom: 0;
+}
+
 .products-brand-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -223,6 +227,9 @@ Template: astra
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
+.tax-product_brand .ast-container .brand-archive {
+  width: 100%;
+}
 .tax-product_brand .ast-container .brand-cont {
   width: 100%;
   max-width: 100%;
@@ -270,6 +277,11 @@ Template: astra
   padding: 120px 24px;
   text-align: center;
 }
+@media screen and (max-width: 768px) {
+  .brand-intro {
+    padding: 80px 24px;
+  }
+}
 
 .brand-intro-title {
   margin-bottom: 30px;
@@ -282,14 +294,17 @@ Template: astra
 }
 
 .brand-detail {
-  margin-bottom: 80px;
-  padding: 120px 24px;
+  padding: 120px 10%;
   background: var(--bg);
+}
+@media screen and (max-width: 1200px) {
+  .brand-detail {
+    padding: 120px 6%;
+  }
 }
 @media screen and (max-width: 768px) {
   .brand-detail {
-    margin-bottom: 50px;
-    padding: 40px 16px;
+    padding: 80px 6%;
   }
 }
 
@@ -304,64 +319,83 @@ Template: astra
 .brand-detail-list {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  max-width: 1000px;
+  gap: 80px;
   margin: 0 auto;
 }
 
 .brand-detail-item {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  display: flex;
   gap: 30px;
-  align-items: center;
-  background: #fff;
+  align-items: end;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 921px) {
   .brand-detail-item {
-    grid-template-columns: 1fr;
-    gap: 15px;
+    flex-direction: column;
   }
 }
 
 .brand-detail-img {
-  aspect-ratio: 16/10;
-  overflow: hidden;
+  width: 60%;
+  box-shadow: 10px 10px 40px #efefef;
 }
 .brand-detail-img img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+}
+@media screen and (max-width: 1200px) {
+  .brand-detail-img {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 921px) {
+  .brand-detail-img {
+    width: 100%;
+  }
 }
 
 .brand-detail-desc {
+  width: 40%;
   padding: 20px 30px;
   font-size: 15px;
   line-height: 1.8;
 }
+@media screen and (max-width: 1200px) {
+  .brand-detail-desc {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 921px) {
+  .brand-detail-desc {
+    width: 100%;
+  }
+}
 @media screen and (max-width: 768px) {
   .brand-detail-desc {
-    padding: 0 20px 20px;
+    padding: 0 20px;
   }
 }
 
 .brand-lineup {
   max-width: 1100px;
-  margin: 0 auto 80px;
-  padding: 0 24px;
+  margin: 0 auto;
+  padding: 120px 24px;
+}
+@media screen and (max-width: 768px) {
+  .brand-lineup {
+    padding: 80px 24px;
+  }
 }
 
 .brand-lineup-title {
   margin-bottom: 40px;
-  font-size: 1.5rem;
   font-weight: 400;
-  letter-spacing: 0.3em;
   text-align: center;
+  font-style: italic;
 }
 
 .brand-lineup-tabs {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 60px;
   margin-bottom: 40px;
 }
@@ -378,14 +412,20 @@ Template: astra
   background: none;
   color: var(--primary-h);
   font-size: 18px;
-  letter-spacing: 0.15em;
   cursor: pointer;
   transition: color 0.3s ease, border-color 0.3s ease;
   font-size: 28px;
+  font-style: italic;
 }
 @media screen and (max-width: 768px) {
   .brand-lineup-tab {
     font-size: 24px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .brand-lineup-tab {
+    font-size: 18px;
+    letter-spacing: 1px;
   }
 }
 .brand-lineup-tab.active, .brand-lineup-tab:hover {
@@ -413,6 +453,10 @@ Template: astra
   .brand-lineup-grid {
     grid-template-columns: 1fr;
   }
+}
+
+.lineup-card {
+  min-width: 0;
 }
 
 .lineup-card-images {

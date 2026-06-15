@@ -60,7 +60,8 @@ $image_ids = array_filter( array_merge(
     </div>
 
     <h3 class="lineup-card-title">
-        <a href="<?= esc_url( get_permalink() ); ?>"><?= esc_html( get_the_title() ); ?></a>
+        <?= esc_html( get_the_title() ); ?>
+        <!-- <a href="<?= esc_url( get_permalink() ); ?>"><?= esc_html( get_the_title() ); ?></a> -->
     </h3>
 
     <?php if ( $product->get_short_description() ) : ?>

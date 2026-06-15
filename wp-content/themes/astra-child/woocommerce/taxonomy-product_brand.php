@@ -46,7 +46,14 @@ if ( ! is_wp_error( $product_ids ) && ! empty( $product_ids ) ) {
         }
     }
 
-    $cat_terms = wp_list_sort( $cats, 'term_id' );
+    // 依後台「商品分類」拖曳排序（termmeta: order）排序
+    $cat_terms = array_values( $cats );
+
+    usort( $cat_terms, function ( $a, $b ) {
+        $order_a = (int) get_term_meta( $a->term_id, 'order', true );
+        $order_b = (int) get_term_meta( $b->term_id, 'order', true );
+        return $order_a <=> $order_b;
+    } );
 }
 
 $has_categories = ! empty( $cat_terms );
@@ -127,7 +134,7 @@ $default_cat    = $has_categories ? reset( $cat_terms )->slug : '';
 
                         <button
                             type="button"
-                            class="brand-lineup-tab<?= 0 === $i ? ' active' : ''; ?>"
+                            class="brand-lineup-tab<?= 0 === $i ? ' active' : ''; ?> IBM-Plex-Mono"
                             data-cat="<?= esc_attr( $cat->slug ); ?>"
                         >
                             <?= esc_html( $cat->name ); ?>
@@ -137,7 +144,7 @@ $default_cat    = $has_categories ? reset( $cat_terms )->slug : '';
 
                 </div>
             <?php else: ?>
-                <h2 class="brand-lineup-title">LINEUP</h2>
+                <h2 class="brand-lineup-title IBM-Plex-Mono">LINEUP</h2>
             <?php endif; ?>
 
             <div class="brand-lineup-grid">
