@@ -42,7 +42,12 @@ if ( empty( $slides ) && $product->get_image_id() ) {
 
 ?>
 
-<article class="lineup-card">
+<?php
+$first_color = ltrim( $slides[0]['color'] ?? '', '#' );
+$permalink   = get_permalink();
+?>
+
+<article class="lineup-card" data-permalink="<?= esc_url( $permalink ); ?>">
 
     <div class="lineup-card-images">
 
@@ -72,6 +77,7 @@ if ( empty( $slides ) && $product->get_image_id() ) {
                         type="button"
                         class="lineup-card-dot<?= 0 === $i ? ' active' : ''; ?>"
                         data-index="<?= esc_attr( $i ); ?>"
+                        data-color="<?= esc_attr( ltrim( $slide['color'], '#' ) ); ?>"
                         <?php if ( $slide['color'] ) : ?>
                             style="--dot-color: <?= esc_attr( $slide['color'] ); ?>;"
                         <?php endif; ?>
@@ -86,8 +92,10 @@ if ( empty( $slides ) && $product->get_image_id() ) {
     </div>
 
     <h3 class="lineup-card-title">
-        <?= esc_html( get_the_title() ); ?>
-        <!-- <a href="<?= esc_url( get_permalink() ); ?>"><?= esc_html( get_the_title() ); ?></a> -->
+        <a
+            class="lineup-card-link"
+            href="<?= esc_url( $first_color ? $permalink . '?color=' . $first_color : $permalink ); ?>"
+        ><?= esc_html( get_the_title() ); ?></a>
     </h3>
 
     <?php if ( $product->get_short_description() ) : ?>

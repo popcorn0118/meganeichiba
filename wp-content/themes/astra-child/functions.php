@@ -74,6 +74,26 @@ function child_dequeue_astra_shop_scripts() {
 
 add_action( 'wp_enqueue_scripts', 'child_dequeue_astra_shop_scripts', 100 );
 
+/**
+ * 商品內頁專用腳本（縮圖 gallery 切換）
+ */
+function child_enqueue_product_single_scripts() {
+
+    if ( ! is_singular( 'product' ) ) {
+        return;
+    }
+
+    wp_enqueue_script(
+        'astra-child-product-single',
+        get_stylesheet_directory_uri() . '/assets/js/product-single.js',
+        [],
+        CHILD_THEME_ASTRA_CHILD_VERSION,
+        true
+    );
+}
+
+add_action( 'wp_enqueue_scripts', 'child_enqueue_product_single_scripts' );
+
 require_once get_stylesheet_directory() . '/inc/ajax-brand-lineup.php';
 
 

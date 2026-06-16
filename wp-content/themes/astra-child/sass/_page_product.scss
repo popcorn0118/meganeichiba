@@ -1,0 +1,200 @@
+@use 'variable' as *;
+@use 'mixin' as *;
+
+// ==========================================================================
+// 商品內頁 (single-product.php)
+// ==========================================================================
+
+.single-product .ast-container {
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.product-single {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 6% 120px;
+
+    @include md() {
+        padding: 40px 6% 80px;
+    }
+}
+
+// 麵包屑
+.product-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 50px;
+    font-size: 13px;
+    color: var(--primary-h);
+
+    a {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover {
+            color: var(--primary);
+        }
+    }
+}
+
+.product-breadcrumb-sep {
+    opacity: .4;
+}
+
+// 二欄主佈局
+.product-single-inner {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 80px;
+    align-items: start;
+
+    @include ml() {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+
+// ── 左欄
+.product-single-info {
+    position: sticky;
+    top: 100px;
+
+    @include ml() {
+        position: static;
+    }
+}
+
+// b: 商品標題
+.product-single-title {
+    margin: 0 0 28px;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: .05em;
+}
+
+// c: 顏色切換
+.product-color-switcher {
+    margin-bottom: 36px;
+}
+
+.product-color-label {
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: var(--primary-h);
+}
+
+.product-color-dots {
+    display: flex;
+    gap: 14px;
+}
+
+.product-color-dot {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--dot-color, #ccc);
+    transition: box-shadow .3s ease;
+
+    &.active,
+    &:hover {
+        box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--dot-color, var(--primary));
+    }
+}
+
+// d: 規格（暫用假字）
+.product-specs {
+    border: 1px solid #e0e0e0;
+    padding: 20px 24px;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--primary);
+}
+
+.product-specs-row {
+    display: flex;
+    gap: 8px;
+    padding: 4px 0;
+
+    dt {
+        min-width: 80px;
+        color: var(--primary-h);
+        font-weight: 400;
+
+        &::after {
+            content: '：';
+        }
+    }
+
+    dd {
+        margin: 0;
+    }
+}
+
+// ── 右欄 gallery
+.product-single-gallery {
+    min-width: 0;
+}
+
+// e: 主圖
+.product-gallery-main {
+    margin-bottom: 16px;
+}
+
+.product-gallery-main-item {
+    display: none;
+
+    &.active {
+        display: block;
+    }
+
+    img {
+        width: 100%;
+        display: block;
+    }
+}
+
+// 縮圖列
+.product-gallery-thumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.product-gallery-thumb {
+    width: calc(20% - 7px);
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--primary);
+        transform: scaleX(0);
+        transition: transform .3s ease;
+    }
+
+    &.active::after {
+        transform: scaleX(1);
+    }
+
+    img {
+        width: 100%;
+        display: block;
+    }
+
+    @include sm() {
+        width: calc(25% - 6px);
+    }
+}

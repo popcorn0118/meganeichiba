@@ -59,6 +59,18 @@ jQuery( function ( $ ) {
 
         $slides.removeClass( 'active' ).eq( index ).addClass( 'active' );
         $dots.removeClass( 'active' ).eq( index ).addClass( 'active' );
+
+        // 同步商品連結的 ?color= 參數
+        var $card      = $images.closest( '.lineup-card' );
+        var permalink  = $card.data( 'permalink' );
+        var color      = $dots.eq( index ).data( 'color' );
+
+        if ( permalink ) {
+            $card.find( '.lineup-card-link' ).attr(
+                'href',
+                color ? permalink + '?color=' + color : permalink
+            );
+        }
     }
 
     // dot 點擊切換（事件委派，支援 AJAX 換入的商品卡）
