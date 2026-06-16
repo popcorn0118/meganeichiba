@@ -28,6 +28,8 @@ function child_enqueue_styles() {
 
 	wp_enqueue_style( 'astra-child-theme-css', get_stylesheet_directory_uri() . '/style.css', array('astra-theme-css'), CHILD_THEME_ASTRA_CHILD_VERSION, 'all' );
 
+
+    
 }
 
 add_action( 'wp_enqueue_scripts', 'child_enqueue_styles', 15 );
@@ -56,6 +58,21 @@ function child_enqueue_brand_archive_scripts() {
 }
 
 add_action( 'wp_enqueue_scripts', 'child_enqueue_brand_archive_scripts' );
+
+/**
+ * 品牌列表頁不需要 Astra 的 shop toolbar，resize 時會爆 null 錯誤，故取消載入
+ */
+function child_dequeue_astra_shop_scripts() {
+
+    if ( ! is_tax( 'product_brand' ) ) {
+        return;
+    }
+
+    wp_dequeue_script( 'astra-modern-shop-view' );
+    wp_deregister_script( 'astra-modern-shop-view' );
+}
+
+add_action( 'wp_enqueue_scripts', 'child_dequeue_astra_shop_scripts', 100 );
 
 require_once get_stylesheet_directory() . '/inc/ajax-brand-lineup.php';
 

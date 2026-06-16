@@ -399,7 +399,7 @@ Template: astra
   justify-content: center;
   flex-wrap: wrap;
   gap: 60px;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 @media screen and (max-width: 576px) {
   .brand-lineup-tabs {
@@ -486,36 +486,42 @@ Template: astra
 }
 
 .lineup-card-dots {
-  position: absolute;
+  position: relative;
   right: 0;
   bottom: 0;
   left: 0;
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 0;
 }
 
 .lineup-card-dot {
-  width: 16px;
-  height: 16px;
-  padding: 0;
+  padding: 10px;
+  border: 0;
+}
+.lineup-card-dot::before {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
   border: none;
   border-radius: 50%;
   background: var(--dot-color, #ccc);
   cursor: pointer;
   transition: box-shadow 0.3s ease;
 }
-.lineup-card-dot:hover, .lineup-card-dot:focus {
+.lineup-card-dot:hover::before, .lineup-card-dot:focus::before {
   background: var(--dot-color, #ccc);
 }
-.lineup-card-dot.active {
+.lineup-card-dot.active::before {
   box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--dot-color, var(--primary));
 }
 
 .lineup-card-title {
-  margin-top: 20px;
-  font-size: 16px;
+  margin-top: 25px;
+  font-size: 20px;
   letter-spacing: 0.05em;
+  text-align: center;
 }
 .lineup-card-title a {
   color: inherit;
@@ -528,6 +534,7 @@ Template: astra
 .lineup-card-desc {
   margin-top: 10px;
   line-height: 1.8;
+  text-align: center;
 }
 .lineup-card-desc p {
   margin: 0;
