@@ -673,6 +673,9 @@ Template: astra
 
 .product-gallery-main {
   margin-bottom: 16px;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
 }
 
 .product-gallery-main-item {
@@ -684,6 +687,8 @@ Template: astra
 .product-gallery-main-item img {
   width: 100%;
   display: block;
+  -webkit-user-drag: none;
+  pointer-events: none;
 }
 
 .product-gallery-thumbs {
