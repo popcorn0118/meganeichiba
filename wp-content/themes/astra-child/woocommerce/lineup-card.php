@@ -14,55 +14,30 @@ if ( ! $product ) {
 
 $slides = [];
 
-// 可變商品：依各 color 規格（變體）的圖片輪播
-if ( $product->is_type( 'variable' ) ) {
+// ACF 重複器 product-color：color-value（色票色）+ color-image（商品列表主圖）
+$color_rows = get_field( 'product-color' ) ?: [];
 
-    foreach ( $product->get_children() as $variation_id ) {
 
-        $variation = wc_get_product( $variation_id );
+foreach ( $color_rows as $row ) {
 
-        if ( ! $variation || ! $variation->exists() ) {
-            continue;
-        }
+    $image = $row['color-image'] ?? null;
 
-        $image_id = $variation->get_image_id();
-
-        if ( ! $image_id ) {
-            continue;
-        }
-
-        $color_slug = $variation->get_attributes()['pa_color'] ?? '';
-        $color_hex  = '';
-
-        if ( $color_slug ) {
-            $color_term = get_term_by( 'slug', $color_slug, 'pa_color' );
-
-            if ( $color_term ) {
-                $color_hex = get_field( 'color', 'pa_color_' . $color_term->term_id ) ?: '';
-            }
-        }
-
-        $slides[] = [
-            'image_id' => $image_id,
-            'color'    => $color_hex,
-        ];
+    if ( ! $image ) {
+        continue;
     }
+
+    $slides[] = [
+        'image_id' => $image['ID'],
+        'color'    => $row['color-value'] ?: '',
+    ];
 }
 
-// 一般商品（或無變體圖片）：使用特色圖 + 圖庫
-if ( empty( $slides ) ) {
-
-    $image_ids = array_values( array_filter( array_merge(
-        [ $product->get_image_id() ],
-        $product->get_gallery_image_ids()
-    ) ) );
-
-    foreach ( $image_ids as $image_id ) {
-        $slides[] = [
-            'image_id' => $image_id,
-            'color'    => '',
-        ];
-    }
+// fallback：無 ACF 資料時使用商品特色圖
+if ( empty( $slides ) && $product->get_image_id() ) {
+    $slides[] = [
+        'image_id' => $product->get_image_id(),
+        'color'    => '',
+    ];
 }
 
 ?>
