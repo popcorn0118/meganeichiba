@@ -463,6 +463,9 @@ Template: astra
 
 .lineup-card-images {
   position: relative;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
 }
 
 .lineup-card-image {
@@ -478,6 +481,8 @@ Template: astra
   height: 100%;
   object-fit: contain;
   display: block;
+  -webkit-user-drag: none;
+  pointer-events: none;
 }
 
 .lineup-card-dots {

@@ -44,18 +44,74 @@ jQuery( function ( $ ) {
 
     } );
 
-    // 商品圖片輪播（事件委派，支援 AJAX 換入的商品卡）
+    // 商品圖片輪播：切換到指定 index
+    function goToSlide( $images, index ) {
+
+        var $slides = $images.find( '.lineup-card-image' );
+        var $dots   = $images.find( '.lineup-card-dot' );
+        var total   = $slides.length;
+
+        if ( total < 2 ) {
+            return;
+        }
+
+        index = ( ( index % total ) + total ) % total;
+
+        $slides.removeClass( 'active' ).eq( index ).addClass( 'active' );
+        $dots.removeClass( 'active' ).eq( index ).addClass( 'active' );
+    }
+
+    // dot 點擊切換（事件委派，支援 AJAX 換入的商品卡）
     $( document ).on( 'click', '.lineup-card-dot', function () {
+        goToSlide( $( this ).closest( '.lineup-card-images' ), $( this ).data( 'index' ) );
+    } );
 
-        var $dot   = $( this );
-        var index  = $dot.data( 'index' );
-        var $images = $dot.closest( '.lineup-card-images' );
+    // 拖曳／滑動圖片切換（事件委派，支援 AJAX 換入的商品卡）
+    var drag = null;
 
-        $images.find( '.lineup-card-dot' ).removeClass( 'active' );
-        $dot.addClass( 'active' );
+    $( document ).on( 'pointerdown', '.lineup-card-images', function ( e ) {
 
-        $images.find( '.lineup-card-image' ).removeClass( 'active' ).eq( index ).addClass( 'active' );
+        var $images = $( this );
 
+        if ( $images.find( '.lineup-card-image' ).length < 2 ) {
+            return;
+        }
+
+        drag = {
+            $images: $images,
+            startX: e.originalEvent.clientX,
+            moved: false
+        };
+    } );
+
+    $( document ).on( 'pointermove', function ( e ) {
+
+        if ( ! drag ) {
+            return;
+        }
+
+        if ( Math.abs( e.originalEvent.clientX - drag.startX ) > 5 ) {
+            drag.moved = true;
+        }
+    } );
+
+    $( document ).on( 'pointerup pointercancel', function ( e ) {
+
+        if ( ! drag ) {
+            return;
+        }
+
+        var deltaX = e.originalEvent.clientX - drag.startX;
+
+        if ( drag.moved && Math.abs( deltaX ) > 40 ) {
+
+            var $images = drag.$images;
+            var current = $images.find( '.lineup-card-image.active' ).index();
+
+            goToSlide( $images, deltaX < 0 ? current + 1 : current - 1 );
+        }
+
+        drag = null;
     } );
 
 } );
