@@ -37,8 +37,16 @@ while ( have_posts() ) :
         }
     }
 
-    $current_row = $color_rows[ $current_index ] ?? null;
-    $gallery     = $current_row['color-gallery'] ?? [];
+    $current_row  = $color_rows[ $current_index ] ?? null;
+
+    // color-image 當第一張，後面接 color-gallery
+    $gallery = [];
+    if ( ! empty( $current_row['color-image'] ) ) {
+        $gallery[] = $current_row['color-image'];
+    }
+    if ( ! empty( $current_row['color-gallery'] ) ) {
+        $gallery = array_merge( $gallery, $current_row['color-gallery'] );
+    }
 
     // 麵包屑：品牌
     $brands = get_the_terms( get_the_ID(), 'product_brand' );
