@@ -92,16 +92,17 @@ $permalink   = get_permalink();
     </div>
 
     <h3 class="lineup-card-title">
+        <!-- <?= esc_html( get_the_title() ); ?> -->
         <a
             class="lineup-card-link"
             href="<?= esc_url( $first_color ? $permalink . '?color=' . $first_color : $permalink ); ?>"
         ><?= esc_html( get_the_title() ); ?></a>
     </h3>
 
-    <?php if ( $product->get_short_description() ) : ?>
+    <?php if ( $product->get_description() ) : ?>
 
         <div class="lineup-card-desc">
-            <?= wp_kses_post( wpautop( $product->get_short_description() ) ); ?>
+            <?= wp_kses_post( wpautop( $product->get_description() ) ); ?>
         </div>
 
     <?php endif; ?>

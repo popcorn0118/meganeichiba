@@ -308,6 +308,7 @@
 }
 
 .lineup-card-desc {
+    @include word-count(2);
     margin-top: 10px;
     line-height: 1.8;
     text-align: center;
