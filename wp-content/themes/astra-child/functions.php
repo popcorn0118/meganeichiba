@@ -136,3 +136,10 @@ add_filter( 'manage_product_brand_custom_column', function( $content, $column_na
 
 
 
+
+/* =================================
+  一次性匯入 WooCommerce 商品
+  執行：http://localhost:8888/?import_products=1
+  跑完註解
+================================== */
+// require_once get_stylesheet_directory() . '/inc/import-products.php';
