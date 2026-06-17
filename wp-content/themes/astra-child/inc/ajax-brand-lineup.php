@@ -40,6 +40,8 @@ function astra_child_brand_lineup_filter() {
         'post_type'      => 'product',
         'posts_per_page' => -1,
         'tax_query'      => $tax_query,
+        'orderby'   => 'menu_order',
+	    'order'     => 'ASC',
     ] );
 
     ob_start();

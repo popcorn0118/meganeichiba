@@ -5,7 +5,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /* =================================
   一次性匯入 WooCommerce 商品
-  執行：http://localhost:8888/?import_products=1
+  1.修改 $files 要匯出的檔
+  2..xlsx 另存成 -> Unicode 文字 (*.txt)
+  3.執行：http://localhost:8888/?import_products=1
   跑完請立刻註解 functions.php 的 require_once
 ================================== */
 
@@ -31,6 +33,8 @@ function popcorn_import_products_once() {
 
 	$files = [
 		'zerogra' => WP_CONTENT_DIR . '/uploads/import/zerogra.txt',
+		'nosefree' => WP_CONTENT_DIR . '/uploads/import/nosefree.txt',
+		'megane-ichiba' => WP_CONTENT_DIR . '/uploads/import/megane-ichiba.txt',
 	];
 
 	$image_map = popcorn_build_attachment_map();

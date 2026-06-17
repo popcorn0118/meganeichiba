@@ -172,6 +172,8 @@ $default_cat    = $has_categories ? reset( $cat_terms )->slug : '';
                     'post_type'      => 'product',
                     'posts_per_page' => -1,
                     'tax_query'      => $lineup_tax_query,
+                    'orderby'   => 'menu_order',
+	                'order'     => 'ASC',
                 ] );
 
                 if ( $lineup_query->have_posts() ) :
