@@ -17,7 +17,8 @@ $acf_term_id = 'product_brand_' . $term->term_id;
 $brand_logo = get_field( 'logo', $acf_term_id );
 $brand_archive = get_field( 'brand-archive', $acf_term_id );
 
-$banner_img  = $brand_archive['banner-img'] ?? null;
+$banner_img   = $brand_archive['banner-img'] ?? null;
+$banner_img_m = $brand_archive['banner-img-m'] ?? null;
 $title       = $brand_archive['title'] ?? '';
 $title_sub   = $brand_archive['title-sub'] ?? '';
 $detail_show = $brand_archive['detail-show'] ?? false;
@@ -66,11 +67,17 @@ $default_cat    = $has_categories ? reset( $cat_terms )->slug : '';
     <?php if ( ! empty( $banner_img['url'] ) ) : ?>
 
         <section class="brand-hero">
-            <div class="brand-hero-img">
-                <img
+            <div class="brand-hero-img<?= ! empty( $banner_img_m['url'] ) ? ' has-img-m' : ''; ?>">
+                <img class="brand-hero-img__pc"
                     src="<?= esc_url( $banner_img['url'] ); ?>"
                     alt="<?= esc_attr( $term->name ); ?>"
                 >
+                <?php if ( ! empty( $banner_img_m['url'] ) ) : ?>
+                <img class="brand-hero-img__m"
+                    src="<?= esc_url( $banner_img_m['url'] ); ?>"
+                    alt="<?= esc_attr( $term->name ); ?>"
+                >
+                <?php endif; ?>
             </div>
         </section>
 

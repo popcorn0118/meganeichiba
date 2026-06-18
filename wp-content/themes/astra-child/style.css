@@ -254,6 +254,17 @@ Template: astra
 .brand-hero-img img {
   max-width: 100%;
 }
+.brand-hero-img__m {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .brand-hero-img.has-img-m .brand-hero-img__pc {
+    display: none;
+  }
+  .brand-hero-img.has-img-m .brand-hero-img__m {
+    display: block;
+  }
+}
 
 .brand-hero-name {
   position: absolute;
