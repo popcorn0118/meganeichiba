@@ -37,7 +37,20 @@
         max-width: 100%;
     }
 
+    &__m {
+        display: none;
+    }
 
+    &.has-img-m {
+        @media screen and (max-width: 768px) {
+            .brand-hero-img__pc {
+                display: none;
+            }
+            .brand-hero-img__m {
+                display: block;
+            }
+        }
+    }
 }
 
 .brand-hero-name {
