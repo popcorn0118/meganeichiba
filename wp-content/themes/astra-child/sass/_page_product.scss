@@ -119,11 +119,11 @@
 
 .product-specs-row {
     display: flex;
-    gap: 8px;
+    gap: 0px;
     padding: 4px 0;
 
     dt {
-        min-width: 80px;
+        min-width: 90px;
         color: var(--primary-h);
         font-weight: 400;
 

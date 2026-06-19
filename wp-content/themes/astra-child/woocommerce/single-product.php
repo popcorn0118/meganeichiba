@@ -75,7 +75,7 @@ endwhile;
             <span class="product-breadcrumb-sep">/</span>
         <?php endif; ?>
 
-        <?php if ( $cat && $brand ) : ?>
+        <?php if ( $cat && $brand && 'uncategorized' !== $cat->slug ) : ?>
             <a href="<?= esc_url( get_term_link( $brand ) . '#cat=' . rawurlencode( $cat->slug ) ); ?>"><?= esc_html( $cat->name ); ?></a>
             <span class="product-breadcrumb-sep">/</span>
         <?php endif; ?>
