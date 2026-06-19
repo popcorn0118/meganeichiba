@@ -14,20 +14,21 @@
 .product-single {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 60px 6% 120px;
+    padding: 20px 24px 120px;
 
     @include md() {
-        padding: 40px 6% 80px;
+        padding: 20px 24px 80px;
     }
 }
 
 // 麵包屑
 .product-breadcrumb {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 10px;
     margin-bottom: 50px;
-    font-size: 13px;
+    font-size: 16px;
     color: var(--primary-h);
 
     a {
@@ -70,8 +71,8 @@
 // b: 商品標題
 .product-single-title {
     margin: 0 0 28px;
-    font-size: 22px;
-    font-weight: 500;
+    font-size: 32px;
+    font-weight: 700;
     letter-spacing: .05em;
 }
 
@@ -82,8 +83,9 @@
 
 .product-color-label {
     margin-bottom: 14px;
-    font-size: 13px;
-    color: var(--primary-h);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
 }
 
 .product-color-dots {
@@ -110,7 +112,7 @@
     border: 1px solid #e0e0e0;
     padding: 20px 24px;
     margin: 0;
-    font-size: 13px;
+    font-size: 16px;
     line-height: 1.6;
     color: var(--primary);
 }
@@ -131,7 +133,9 @@
     }
 
     dd {
+        color: var(--text);
         margin: 0;
+        font-weight: 500;
     }
 }
 
@@ -167,17 +171,22 @@
 .product-gallery-thumbs {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 20px 10px;
 }
 
 .product-gallery-thumb {
-    width: calc(20% - 7px);
+    width: calc(20% - 8px);
     padding: 0;
     border: none;
     background: none;
     cursor: pointer;
     position: relative;
-
+    @include md() {
+        width: calc(100% / 4 - 8px);
+    }
+    @include sm() {
+        width: calc(100% / 3 - 8px);
+    }
     &::after {
         content: '';
         position: absolute;
@@ -199,7 +208,5 @@
         display: block;
     }
 
-    @include sm() {
-        width: calc(25% - 6px);
-    }
+
 }
