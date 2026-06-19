@@ -59,6 +59,9 @@ while ( have_posts() ) :
     // 商品規格（ACF group）
     $product_info = get_field( 'product-info' ) ?: [];
 
+    // 品牌 logo（從品牌 taxonomy term 的 ACF 欄位取得）
+    $brand_logo = $brand ? get_field( 'logo', 'product_brand_' . $brand->term_id ) : null;
+
 endwhile;
 
 ?>
@@ -88,18 +91,16 @@ endwhile;
         <!-- 左欄：商品資訊 -->
         <div class="product-single-info">
 
-            <!-- b: 標題 -->
-            <h1 class="product-single-title"><?= esc_html( get_the_title() ); ?></h1>
+            <!-- a: 品牌 logo -->
+            <?php if ( $brand_logo ) : ?>
+                <div class="product-brand-logo">
+                    <?= wp_get_attachment_image( $brand_logo['ID'], 'full' ); ?>
+                </div>
+            <?php endif; ?>
 
-            <!-- c: 顏色切換 -->
-            <?php if ( ! empty( $color_rows ) ) : ?>
-
-                <div class="product-color-switcher">
-
-                    <p class="product-color-label">
-                        顏色 / <span><?= esc_html( $current_row['color-code'] ?? '' ); ?></span>
-                    </p>
-
+            <!-- b: 型號 / 色號 / 框型 + 顏色切換 -->
+            <div class="product-color-switcher">
+                <?php if ( ! empty( $color_rows ) ) : ?>
                     <div class="product-color-dots">
 
                         <?php foreach ( $color_rows as $i => $row ) : ?>
@@ -115,23 +116,43 @@ endwhile;
                         <?php endforeach; ?>
 
                     </div>
+                <?php endif; ?>
 
-                </div>
+                <dl class="product-model-info">
+                    <div class="product-model-info-row">
+                        <dt>型號</dt>
+                        <dd><?= esc_html( get_the_title() ); ?></dd>
+                    </div>
+                    <div class="product-model-info-row">
+                        <dt>色號</dt>
+                        <dd><?= esc_html( $current_row['color-code'] ?? '—' ); ?></dd>
+                    </div>
+                    <div class="product-model-info-row">
+                        <dt>框型</dt>
+                        <dd><?= esc_html( $product_info['frame-shape'] ?? '—' ); ?></dd>
+                    </div>
+                </dl>
 
-            <?php endif; ?>
+            </div>
 
             
 
 
             <!-- d: 規格 -->
             <dl class="product-specs">
-                <div class="product-specs-row"><dt>框型</dt><dd><?= esc_html( $product_info['frame-shape'] ?? '—' ); ?></dd></div>
-                <div class="product-specs-row"><dt>鏡框材質</dt><dd><?= esc_html( $product_info['frame-material'] ?? '—' ); ?></dd></div>
-                <div class="product-specs-row"><dt>鏡腳材質</dt><dd><?= esc_html( $product_info['temple-material'] ?? '—' ); ?></dd></div>
-                <div class="product-specs-row"><dt>鏡片寬度</dt><dd><?= esc_html( $product_info['lens-width'] ?? '—' ); ?></dd></div>
-                <div class="product-specs-row"><dt>鼻樑寬度</dt><dd><?= esc_html( $product_info['bridge-width'] ?? '—' ); ?></dd></div>
-                <div class="product-specs-row"><dt>鏡腳長度</dt><dd><?= esc_html( $product_info['temple-length'] ?? '—' ); ?></dd></div>
-                <div class="product-specs-row"><dt>鏡片高度</dt><dd><?= esc_html( $product_info['lens-height'] ?? '—' ); ?></dd></div>
+                <div class="product-dd">
+                    <div class="product-specs-label">Size:</div>
+                    <div class="product-specs-row"><dt>鏡片寬度</dt><dd><?= esc_html( $product_info['lens-width'] ?? '—' ); ?></dd></div>
+                    <div class="product-specs-row"><dt>鼻樑寬度</dt><dd><?= esc_html( $product_info['bridge-width'] ?? '—' ); ?></dd></div>
+                    <div class="product-specs-row"><dt>鏡腳長度</dt><dd><?= esc_html( $product_info['temple-length'] ?? '—' ); ?></dd></div>
+                    <div class="product-specs-row"><dt>鏡片高度</dt><dd><?= esc_html( $product_info['lens-height'] ?? '—' ); ?></dd></div>
+                </div>
+                
+                <div class="product-dd">
+                    <div class="product-specs-label">Material:</div>
+                    <div class="product-specs-row"><dt>鏡框材質</dt><dd><?= esc_html( $product_info['frame-material'] ?? '—' ); ?></dd></div>
+                    <div class="product-specs-row"><dt>鏡腳材質</dt><dd><?= esc_html( $product_info['temple-material'] ?? '—' ); ?></dd></div>
+                </div>
             </dl>
 
         </div>

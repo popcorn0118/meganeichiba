@@ -59,6 +59,13 @@
 }
 
 // ── 左欄
+.product-brand-logo {
+    margin-bottom: 30px;
+    img {
+        width: auto;
+        height: 30px;
+    }
+}
 .product-single-info {
     position: sticky;
     top: 100px;
@@ -78,7 +85,7 @@
 
 // c: 顏色切換
 .product-color-switcher {
-    margin-bottom: 36px;
+    margin-bottom: 16px;
 }
 
 .product-color-label {
@@ -107,7 +114,38 @@
     }
 }
 
-// d: 規格（暫用假字）
+// b: 型號 / 色號 / 框型
+.product-model-info {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--primary);
+    margin: 20px 0 0;
+}
+
+.product-model-info-row {
+    display: flex;
+    gap: 0px;
+    padding: 4px 0;
+    
+    dt {
+        min-width: 50px;
+        color: var(--primary-h);
+        font-weight: 400;
+
+        &::after {
+            content: '：';
+        }
+    }
+
+    dd {
+        color: var(--text);
+        margin: 0;
+        font-weight: 500;
+    }
+}
+
+// d: 規格
 .product-specs {
     border: 1px solid #e0e0e0;
     padding: 20px 24px;
@@ -115,13 +153,23 @@
     font-size: 16px;
     line-height: 1.6;
     color: var(--primary);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
+.product-dd {
 
+}
+.product-specs-label {
+    font-size: 14px;
+    margin-bottom: 5px;
+
+}
 .product-specs-row {
     display: flex;
     gap: 0px;
-    padding: 4px 0;
-
+    padding: 4px 0 0 10px;
+    font-size: 14px;
     dt {
         min-width: 90px;
         color: var(--primary-h);
