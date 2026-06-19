@@ -92,11 +92,11 @@ $permalink   = get_permalink();
     </div>
 
     <h3 class="lineup-card-title">
-        <!-- <?= esc_html( get_the_title() ); ?> -->
-        <a
+        <?= esc_html( get_the_title() ); ?>
+        <!-- <a
             class="lineup-card-link"
             href="<?= esc_url( $first_color ? $permalink . '?color=' . $first_color : $permalink ); ?>"
-        ><?= esc_html( get_the_title() ); ?></a>
+        ><?= esc_html( get_the_title() ); ?></a> -->
     </h3>
 
     <?php if ( $product->get_description() ) : ?>

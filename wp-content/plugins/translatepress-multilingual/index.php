@@ -3,14 +3,14 @@
 Plugin Name: TranslatePress - Multilingual
 Plugin URI: https://translatepress.com/
 Description: Experience a better way of translating your WordPress site using a visual front-end translation editor, with full support for WooCommerce and site builders.
-Version: 3.2
+Version: 3.2.2
 Author: Cozmoslabs, Razvan Mocanu, Madalin Ungureanu, Cristophor Hurduban
 Author URI: https://cozmoslabs.com/
 Text Domain: translatepress-multilingual
 Domain Path: /languages
 License: GPL2
 WC requires at least: 2.5.0
-WC tested up to: 10.7
+WC tested up to: 10.8.1
 
 == Copyright ==
 Copyright 2017 Cozmoslabs (www.cozmoslabs.com)
@@ -32,36 +32,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 // Exit if accessed directly
 if ( !defined('ABSPATH' ) )
     exit();
-    
-    add_filter(
-	'pre_http_request',
-	function( $preempt, $parsed_args, $url ) {
-		if ( $parsed_args['method'] === 'POST' && strpos( $url, 'https://translatepress.com' ) !== false ) {
-			$response_array = array(
-				'success'   => true,
-				'license'   => 'valid',
-				'item_id'   => false,
-				'item_name' => 'TranslatePress+Business',
-				'error'     => '',
-				'checksum'  => '1415b451be1a13c283ba771ea52d38bb',
-			);
-
-			$response_body = wp_json_encode( $response_array );
-
-			return array(
-				'headers'  => array(),
-				'body'     => $response_body,
-				'response' => array(
-					'code'    => 200,
-					'message' => 'OK',
-				),
-			);
-		}
-		return $preempt;
-	},
-	10,
-	3
-);
 
 
 function trp_enable_translatepress(){
@@ -79,12 +49,8 @@ function trp_enable_translatepress(){
 
 if ( trp_enable_translatepress() ) {
 	require_once plugin_dir_path( __FILE__ ) . 'class-translate-press.php';
-
-	/** License classes includes heresettings
-	 * Since version 1.4.6
-	 * It need to be outside of a hook so it load before the classes that are in the addons, that we are trying to phase out
-	 */
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-edd-sl-plugin-updater.php';
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-ai-api-key.php';
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-ai-api-key-check.php';
 
 	/* make sure we execute our plugin before other plugins so the changes we make apply across the board */
 	add_action( 'plugins_loaded', 'trp_run_translatepress_hooks', 1 );
