@@ -226,7 +226,15 @@ function popcorn_read_txt_rows( $file_path ) {
 			continue;
 		}
 
-		$rows[] = explode( "\t", $line );
+		$row = str_getcsv( $line, "\t", '"' );
+
+		$row = array_map( function( $value ) {
+			$value = trim( $value );
+			$value = str_replace( '""', '"', $value );
+			return $value;
+		}, $row );
+
+		$rows[] = $row;
 	}
 
 	return $rows;

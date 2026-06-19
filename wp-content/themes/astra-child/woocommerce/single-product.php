@@ -52,6 +52,13 @@ while ( have_posts() ) :
     $brands = get_the_terms( get_the_ID(), 'product_brand' );
     $brand  = ( ! empty( $brands ) && ! is_wp_error( $brands ) ) ? $brands[0] : null;
 
+    // 麵包屑：分類
+    $cats = get_the_terms( get_the_ID(), 'product_cat' );
+    $cat  = ( ! empty( $cats ) && ! is_wp_error( $cats ) ) ? $cats[0] : null;
+
+    // 商品規格（ACF group）
+    $product_info = get_field( 'product-info' ) ?: [];
+
 endwhile;
 
 ?>
@@ -60,11 +67,16 @@ endwhile;
 
     <!-- a: 麵包屑 -->
     <nav class="product-breadcrumb">
-        <a href="<?= esc_url( wc_get_page_permalink( 'shop' ) ); ?>">全部商品</a>
+        <span>PRODUCT</span>
         <span class="product-breadcrumb-sep">/</span>
 
         <?php if ( $brand ) : ?>
             <a href="<?= esc_url( get_term_link( $brand ) ); ?>"><?= esc_html( $brand->name ); ?></a>
+            <span class="product-breadcrumb-sep">/</span>
+        <?php endif; ?>
+
+        <?php if ( $cat && $brand ) : ?>
+            <a href="<?= esc_url( get_term_link( $brand ) . '#cat=' . rawurlencode( $cat->slug ) ); ?>"><?= esc_html( $cat->name ); ?></a>
             <span class="product-breadcrumb-sep">/</span>
         <?php endif; ?>
 
@@ -108,14 +120,18 @@ endwhile;
 
             <?php endif; ?>
 
-            <!-- d: 規格（暫用假字） -->
+            
+
+
+            <!-- d: 規格 -->
             <dl class="product-specs">
-                <div class="product-specs-row"><dt>產地</dt><dd>日本</dd></div>
-                <div class="product-specs-row"><dt>材質</dt><dd>鈦合金、鈦</dd></div>
-                <div class="product-specs-row"><dt>鏡片寬度</dt><dd>—</dd></div>
-                <div class="product-specs-row"><dt>鼻樑寬度</dt><dd>—</dd></div>
-                <div class="product-specs-row"><dt>鏡腳長度</dt><dd>—</dd></div>
-                <div class="product-specs-row"><dt>鏡片高度</dt><dd>—</dd></div>
+                <div class="product-specs-row"><dt>框型</dt><dd><?= esc_html( $product_info['frame-shape'] ?? '—' ); ?></dd></div>
+                <div class="product-specs-row"><dt>鏡框材質</dt><dd><?= esc_html( $product_info['frame-material'] ?? '—' ); ?></dd></div>
+                <div class="product-specs-row"><dt>鏡腳材質</dt><dd><?= esc_html( $product_info['temple-material'] ?? '—' ); ?></dd></div>
+                <div class="product-specs-row"><dt>鏡片寬度</dt><dd><?= esc_html( $product_info['lens-width'] ?? '—' ); ?></dd></div>
+                <div class="product-specs-row"><dt>鼻樑寬度</dt><dd><?= esc_html( $product_info['bridge-width'] ?? '—' ); ?></dd></div>
+                <div class="product-specs-row"><dt>鏡腳長度</dt><dd><?= esc_html( $product_info['temple-length'] ?? '—' ); ?></dd></div>
+                <div class="product-specs-row"><dt>鏡片高度</dt><dd><?= esc_html( $product_info['lens-height'] ?? '—' ); ?></dd></div>
             </dl>
 
         </div>
@@ -149,6 +165,13 @@ endwhile;
                     </div>
                 <?php endif; ?>
 
+            <?php endif; ?>
+            <p></p>
+            <?php $desc = $product->get_description(); ?>
+            <?php if ( $desc ) : ?>
+                <div class="product-desc">
+                    <?= wp_kses_post( wpautop( $desc ) ); ?>
+                </div>
             <?php endif; ?>
 
         </div>

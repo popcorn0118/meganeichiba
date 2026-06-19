@@ -44,6 +44,15 @@ jQuery( function ( $ ) {
 
     } );
 
+    // URL hash (#cat=slug) 自動觸發對應分類頁籤（須在 click handler 註冊後才能 trigger）
+    var hashMatch = window.location.hash.match( /^#cat=(.+)$/ );
+    if ( hashMatch ) {
+        var $hashTab = $lineup.find( '.brand-lineup-tab[data-cat="' + decodeURIComponent( hashMatch[1] ) + '"]' );
+        if ( $hashTab.length && ! $hashTab.hasClass( 'active' ) ) {
+            $hashTab.trigger( 'click' );
+        }
+    }
+
     // 商品圖片輪播：切換到指定 index
     function goToSlide( $images, index ) {
 
