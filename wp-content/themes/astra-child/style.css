@@ -21,6 +21,9 @@ Template: astra
   font-size: 18px;
 }
 
+/*
+* Header
+*/
 .trp-shortcode-switcher__wrapper {
   line-height: 1;
   display: none !important;
@@ -30,6 +33,10 @@ Template: astra
 }
 .trp-shortcode-switcher__wrapper .trp-flag-image {
   display: none !important;
+}
+
+.ast-desktop:not(:has(.ast-header-sticked)) .ast-primary-header-bar .main-header-menu > .menu-item {
+  line-height: unset;
 }
 
 @media screen and (max-width: 576px) {

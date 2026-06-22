@@ -26,8 +26,11 @@ body {
     }
 }
 
-//語系切換
+/*
+* Header
+*/
 
+//語系切換
 .trp-shortcode-switcher__wrapper {
     line-height: 1;
     display: none !important; //先隱藏
@@ -43,6 +46,9 @@ body {
     //         display: none;
     //     }
     // }
+}
+.ast-desktop:not(:has(.ast-header-sticked)) .ast-primary-header-bar .main-header-menu > .menu-item {
+        line-height: unset;
 }
 @include sm() {
     .ast-builder-layout-element.ast-flex.site-header-focus-item.ast-header-html-2 {
