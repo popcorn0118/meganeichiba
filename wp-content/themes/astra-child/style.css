@@ -17,6 +17,19 @@ Template: astra
   --bg: var( --e-global-color-astglobalcolor4 );
 }
 
+body .Noto-Serif, body .Noto-Serif * {
+  font-family: "Noto Serif TC", Sans-serif;
+}
+body .IBM-Plex-Mono, body .IBM-Plex-Mono * {
+  font-family: "IBM Plex Mono";
+}
+body.translatepress-en_US .Noto-Serif, body.translatepress-en_US .Noto-Serif * {
+  font-family: "IBM Plex Mono";
+}
+body.translatepress-zh_CN .Noto-Serif, body.translatepress-zh_CN .Noto-Serif * {
+  font-family: "Noto Serif SC", Sans-serif;
+}
+
 .btn .elementor-button-icon i {
   font-size: 18px;
 }
@@ -53,14 +66,6 @@ Template: astra
     padding: 7px 8px;
   }
 }
-.Noto-Serif-JP {
-  font-family: "Noto Serif JP", serif;
-}
-
-.IBM-Plex-Mono {
-  font-family: "IBM Plex Mono";
-}
-
 #contact h2 {
   margin-bottom: 0;
 }

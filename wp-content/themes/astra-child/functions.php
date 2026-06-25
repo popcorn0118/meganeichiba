@@ -19,12 +19,25 @@ define( 'CHILD_THEME_ASTRA_CHILD_VERSION', '1.0.0' );
 function child_enqueue_styles() {
 
     //引入字型
-    wp_enqueue_style(
+    if ( determine_locale() === 'zh_TW' ) {
+
+	wp_enqueue_style(
 		'google-fonts',
-		'https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&display=swap',
+		'https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700&display=swap',
 		[],
 		null
 	);
+
+    } elseif ( in_array( determine_locale(), [ 'zh_CN', 'zh_Hans' ], true ) ) {
+
+        wp_enqueue_style(
+            'google-fonts',
+            'https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap',
+            [],
+            null
+        );
+
+    }
 
 	wp_enqueue_style( 'astra-child-theme-css', get_stylesheet_directory_uri() . '/style.css', array('astra-theme-css'), CHILD_THEME_ASTRA_CHILD_VERSION, 'all' );
 

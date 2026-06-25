@@ -89,7 +89,7 @@ $default_cat    = $has_categories ? reset( $cat_terms )->slug : '';
             <section class="brand-intro">
 
                 <?php if ( $title ) : ?>
-                    <h1 class="brand-intro-title Noto-Serif-JP"><?= $title; ?></h1>
+                    <h1 class="brand-intro-title Noto-Serif"><?= $title; ?></h1>
                 <?php endif; ?>
 
                 <?php if ( $title_sub ) : ?>

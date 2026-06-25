@@ -9,14 +9,25 @@ body {
 //       font-family: 'IBM Plex Mono', 'Noto Sans TC', sans-serif;
 
 //   }
+    //字型
+    .Noto-Serif, .Noto-Serif * {
+        font-family: "Noto Serif TC", Sans-serif;
+    }
+    .IBM-Plex-Mono, .IBM-Plex-Mono * {
+        font-family: "IBM Plex Mono";
+    }
     &.translatepress-zh_TW {
 
     }
     &.translatepress-en_US {
-
+        .Noto-Serif, .Noto-Serif * {
+            font-family: "IBM Plex Mono";
+        }
     }
     &.translatepress-zh_CN {
-        
+        .Noto-Serif, .Noto-Serif * {
+            font-family: "Noto Serif SC", Sans-serif;
+        }
     }
 }
 
@@ -65,14 +76,6 @@ body {
          padding: 7px 8px;
         
     }
-}
-
-//字型
-.Noto-Serif-JP {
-    font-family: "Noto Serif JP", serif;
-}
-.IBM-Plex-Mono {
-    font-family: "IBM Plex Mono";
 }
 
 #contact h2 {
