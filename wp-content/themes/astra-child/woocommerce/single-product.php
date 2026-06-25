@@ -141,7 +141,7 @@ endwhile;
             <!-- d: 規格 -->
             <dl class="product-specs">
                 <div class="product-dd">
-                    <div class="product-specs-label">Size:</div>
+                    <div class="product-specs-label">尺寸：</div>
                     <div class="product-specs-row"><dt>鏡片寬度</dt><dd><?= esc_html( $product_info['lens-width'] ?? '—' ); ?></dd></div>
                     <div class="product-specs-row"><dt>鼻樑寬度</dt><dd><?= esc_html( $product_info['bridge-width'] ?? '—' ); ?></dd></div>
                     <div class="product-specs-row"><dt>鏡腳長度</dt><dd><?= esc_html( $product_info['temple-length'] ?? '—' ); ?></dd></div>
@@ -149,7 +149,7 @@ endwhile;
                 </div>
                 
                 <div class="product-dd">
-                    <div class="product-specs-label">Material:</div>
+                    <div class="product-specs-label">材質：</div>
                     <div class="product-specs-row"><dt>鏡框材質</dt><dd><?= esc_html( $product_info['frame-material'] ?? '—' ); ?></dd></div>
                     <div class="product-specs-row"><dt>鏡腳材質</dt><dd><?= esc_html( $product_info['temple-material'] ?? '—' ); ?></dd></div>
                 </div>

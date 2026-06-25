@@ -125,6 +125,7 @@
 
 .product-model-info-row {
     display: flex;
+    flex-wrap: wrap;
     gap: 0px;
     padding: 4px 0;
     
@@ -167,6 +168,7 @@
 }
 .product-specs-row {
     display: flex;
+    flex-wrap: wrap;
     gap: 0px;
     padding: 4px 0 0 10px;
     font-size: 14px;
@@ -257,4 +259,19 @@
     }
 
 
+}
+
+
+.translatepress-en_US {
+    .product-model-info-row {
+        letter-spacing: 1px;
+    }
+    .product-specs-row {
+        letter-spacing: 1px;
+    }
+    .product-model-info-row ,.product-specs-row {
+        dt {
+            min-width: fit-content;
+        }
+    }   
 }

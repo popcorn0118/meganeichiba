@@ -683,6 +683,7 @@ body.translatepress-zh_CN .Noto-Serif, body.translatepress-zh_CN .Noto-Serif * {
 
 .product-model-info-row {
   display: flex;
+  flex-wrap: wrap;
   gap: 0px;
   padding: 4px 0;
 }
@@ -719,6 +720,7 @@ body.translatepress-zh_CN .Noto-Serif, body.translatepress-zh_CN .Noto-Serif * {
 
 .product-specs-row {
   display: flex;
+  flex-wrap: wrap;
   gap: 0px;
   padding: 4px 0 0 10px;
   font-size: 14px;
@@ -802,6 +804,16 @@ body.translatepress-zh_CN .Noto-Serif, body.translatepress-zh_CN .Noto-Serif * {
 .product-gallery-thumb img {
   width: 100%;
   display: block;
+}
+
+.translatepress-en_US .product-model-info-row {
+  letter-spacing: 1px;
+}
+.translatepress-en_US .product-specs-row {
+  letter-spacing: 1px;
+}
+.translatepress-en_US .product-model-info-row dt, .translatepress-en_US .product-specs-row dt {
+  min-width: fit-content;
 }
 
 /*# sourceMappingURL=style.css.map */
