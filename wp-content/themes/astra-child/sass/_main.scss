@@ -15,7 +15,7 @@ body {
     &.translatepress-en_US {
 
     }
-    &.translatepress-ja {
+    &.translatepress-zh_CN {
         
     }
 }
@@ -33,7 +33,7 @@ body {
 //語系切換
 .trp-shortcode-switcher__wrapper {
     line-height: 1;
-    display: none !important; //先隱藏
+    // display: none !important; //先隱藏
     .trp-shortcode-switcher {
         padding: 0;
     }
