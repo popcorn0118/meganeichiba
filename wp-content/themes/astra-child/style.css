@@ -319,7 +319,6 @@ body.translatepress-zh_CN .Noto-Serif, body.translatepress-zh_CN .Noto-Serif * {
 .brand-detail {
   padding: 120px 10%;
   background: var(--bg);
-  margin-bottom: 120px;
 }
 @media screen and (max-width: 1200px) {
   .brand-detail {
@@ -329,7 +328,6 @@ body.translatepress-zh_CN .Noto-Serif, body.translatepress-zh_CN .Noto-Serif * {
 @media screen and (max-width: 768px) {
   .brand-detail {
     padding: 80px 6%;
-    margin-bottom: 80px;
   }
 }
 
@@ -401,11 +399,12 @@ body.translatepress-zh_CN .Noto-Serif, body.translatepress-zh_CN .Noto-Serif * {
 
 .brand-lineup {
   max-width: 1300px;
-  margin: 0 auto;
+  margin: 120px auto 0 auto;
   padding: 0 0 120px 0;
 }
 @media screen and (max-width: 768px) {
   .brand-lineup {
+    margin: 80px auto 0 auto;
     padding: 0 0 80px 0;
   }
 }

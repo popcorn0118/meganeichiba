@@ -138,7 +138,9 @@ $default_cat    = $has_categories ? reset( $cat_terms )->slug : '';
                 <div class="brand-lineup-tabs">
 
                     <?php foreach ( $cat_terms as $i => $cat ) : ?>
-
+                        <?php
+                            $hide = get_field( 'hide', $cat );
+                            if ($hide == 0): ?>
                         <button
                             type="button"
                             class="brand-lineup-tab<?= 0 === $i ? ' active' : ''; ?> IBM-Plex-Mono"
@@ -146,6 +148,7 @@ $default_cat    = $has_categories ? reset( $cat_terms )->slug : '';
                         >
                             <?= esc_html( $cat->name ); ?>
                         </button>
+                        <?php endif; ?>
 
                     <?php endforeach; ?>
 

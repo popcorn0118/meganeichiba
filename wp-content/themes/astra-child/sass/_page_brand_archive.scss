@@ -96,13 +96,11 @@
 .brand-detail {
     padding: 120px 10%;
     background: var(--bg);
-    margin-bottom: 120px;
     @include xl() {
         padding: 120px 6%;
     }
     @include md() {
         padding: 80px 6%;
-        margin-bottom: 80px;
     }
 }
 
@@ -164,9 +162,10 @@
 // LINEUP
 .brand-lineup {
     max-width: 1300px;
-    margin: 0 auto;
+    margin:120px auto 0 auto;
     padding: 0 0 120px 0;
     @include md() {
+        margin:80px auto 0 auto;
         padding: 0 0 80px 0;
     }
 }
