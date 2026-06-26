@@ -32,9 +32,10 @@ function popcorn_import_products_once() {
 	}
 
 	$files = [
-		'zerogra' => WP_CONTENT_DIR . '/uploads/import/zerogra.txt',
-		'nosefree' => WP_CONTENT_DIR . '/uploads/import/nosefree.txt',
-		'megane-ichiba' => WP_CONTENT_DIR . '/uploads/import/megane-ichiba.txt',
+		// 'zerogra' => WP_CONTENT_DIR . '/uploads/import/zerogra.txt',
+		// 'nosefree' => WP_CONTENT_DIR . '/uploads/import/nosefree.txt',
+		// 'megane-ichiba' => WP_CONTENT_DIR . '/uploads/import/megane-ichiba.txt',
+		'the-bedford-hotel' => WP_CONTENT_DIR . '/uploads/import/the-bedford-hotel.txt',
 	];
 
 	$image_map = popcorn_build_attachment_map();
