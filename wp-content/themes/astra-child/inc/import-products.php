@@ -32,10 +32,10 @@ function popcorn_import_products_once() {
 	}
 
 	$files = [
-		// 'zerogra' => WP_CONTENT_DIR . '/uploads/import/zerogra.txt',
-		// 'nosefree' => WP_CONTENT_DIR . '/uploads/import/nosefree.txt',
-		// 'megane-ichiba' => WP_CONTENT_DIR . '/uploads/import/megane-ichiba.txt',
-		// 'the-bedford-hotel' => WP_CONTENT_DIR . '/uploads/import/the-bedford-hotel.txt',
+		'zerogra' => WP_CONTENT_DIR . '/uploads/import/zerogra.txt',
+		'nosefree' => WP_CONTENT_DIR . '/uploads/import/nosefree.txt',
+		'megane-ichiba' => WP_CONTENT_DIR . '/uploads/import/megane-ichiba.txt',
+		'the-bedford-hotel' => WP_CONTENT_DIR . '/uploads/import/the-bedford-hotel.txt',
 	];
 
 	$image_map = popcorn_build_attachment_map();
@@ -61,12 +61,13 @@ function popcorn_import_products_once() {
 			continue;
 		}
 
-		$current_product_title = '';
-		$current_product_cat   = '';
-		$current_description   = '';
-		$current_colors        = [];
-		$current_info          = [];
-		$product_started       = false;
+		$current_product_title  = '';
+		$current_product_cat    = '';
+		$current_description    = '';
+		$current_post_status    = 'publish';
+		$current_colors         = [];
+		$current_info           = [];
+		$product_started        = false;
 
 		foreach ( $rows as $index => $row ) {
 
@@ -74,21 +75,24 @@ function popcorn_import_products_once() {
 				continue;
 			}
 
-			$row = array_pad( $row, 14, '' );
+			$row = array_pad( $row, 15, '' );
 
-			$product_cat     = trim( $row[0] );
-			$post_title      = trim( $row[1] );
-			$color_code      = trim( $row[2] );
-			$color_value     = trim( $row[3] );
+			$post_status_raw = trim( $row[0] );
+			$product_cat     = trim( $row[1] );
+			$post_title      = trim( $row[2] );
+			$color_code      = trim( $row[3] );
+			$color_value     = trim( $row[4] );
 
-			$temple_material = trim( $row[6] );
-			$frame_material  = trim( $row[7] );
-			$frame_shape     = trim( $row[8] );
-			$lens_width      = trim( $row[9] );
-			$bridge_width    = trim( $row[10] );
-			$temple_length   = trim( $row[11] );
-			$lens_height     = trim( $row[12] );
-			$description     = trim( $row[13] );
+			$temple_material = trim( $row[7] );
+			$frame_material  = trim( $row[8] );
+			$frame_shape     = trim( $row[9] );
+			$lens_width      = trim( $row[10] );
+			$bridge_width    = trim( $row[11] );
+			$temple_length   = trim( $row[12] );
+			$lens_height     = trim( $row[13] );
+			$description     = trim( $row[14] );
+
+			$post_status = popcorn_parse_post_status( $post_status_raw );
 
 			if ( $post_title !== '' ) {
 
@@ -100,7 +104,8 @@ function popcorn_import_products_once() {
 						$current_product_cat,
 						$brand_slug,
 						$current_colors,
-						$current_info
+						$current_info,
+						$current_post_status
 					);
 
 					if ( $result === 'created' ) {
@@ -115,6 +120,7 @@ function popcorn_import_products_once() {
 				$current_product_title = $post_title;
 				$current_product_cat   = $product_cat ?: 'uncategorized';
 				$current_description   = $description;
+				$current_post_status   = $post_status;
 				$current_colors        = [];
 
 				$current_info = [
@@ -171,7 +177,8 @@ function popcorn_import_products_once() {
 				$current_product_cat,
 				$brand_slug,
 				$current_colors,
-				$current_info
+				$current_info,
+				$current_post_status
 			);
 
 			if ( $result === 'created' ) {
@@ -241,7 +248,7 @@ function popcorn_read_txt_rows( $file_path ) {
 	return $rows;
 }
 
-function popcorn_save_import_product( $title, $description, $product_cat, $brand_slug, $colors, $info ) {
+function popcorn_save_import_product( $title, $description, $product_cat, $brand_slug, $colors, $info, $post_status = 'publish' ) {
 
 	$product_id = popcorn_get_product_id_by_title( $title );
 	$is_update  = $product_id ? true : false;
@@ -252,7 +259,7 @@ function popcorn_save_import_product( $title, $description, $product_cat, $brand
 			'ID'           => $product_id,
 			'post_title'   => $title,
 			'post_content' => $description,
-			'post_status'  => 'publish',
+			'post_status'  => $post_status,
 			'post_type'    => 'product',
 		], true);
 
@@ -261,7 +268,7 @@ function popcorn_save_import_product( $title, $description, $product_cat, $brand
 		$result = wp_insert_post([
 			'post_title'   => $title,
 			'post_content' => $description,
-			'post_status'  => 'publish',
+			'post_status'  => $post_status,
 			'post_type'    => 'product',
 		], true);
 
@@ -284,6 +291,24 @@ function popcorn_save_import_product( $title, $description, $product_cat, $brand
 	delete_post_meta( $product_id, '_product_image_gallery' );
 
 	return $is_update ? 'updated' : 'created';
+}
+
+function popcorn_parse_post_status( $value ) {
+
+	$value = strtolower( trim( $value ) );
+
+	$allowed_statuses = [
+		'publish',
+		'draft',
+		'private',
+		'pending',
+	];
+
+	if ( in_array( $value, $allowed_statuses, true ) ) {
+		return $value;
+	}
+
+	return 'publish';
 }
 
 function popcorn_get_product_id_by_title( $title ) {
