@@ -1,5 +1,22 @@
 jQuery(function ($) {
 
+    let confirmMode = false;
+
+    window.addEventListener('beforeunload', function (e) {
+
+        if (!confirmMode) {
+            return;
+        }
+
+        e.preventDefault();
+
+        // Chrome 需要
+        e.returnValue = '';
+
+    });
+
+
+
     function checkEmailMatch($form, showError = false) {
 
         const $email = $form.find('input[name="your-email"]');
@@ -8,9 +25,9 @@ jQuery(function ($) {
         const email = $.trim($email.val());
         const confirm = $.trim($confirm.val());
 
-        // 清除原本提示
+        // 只清除確認 Email 自己的錯誤
         $confirm.removeClass('is-error');
-        $form.find('.wpcf7-not-valid-tip').remove();
+        $confirm.next('.email-confirm-error').remove();
 
         // 其中一個沒填
         if (!email || !confirm) {
@@ -22,7 +39,8 @@ jQuery(function ($) {
 
             if (showError) {
                 $confirm.addClass('is-error');
-                $confirm.after('<div class="wpcf7-not-valid-tip">電子郵件與確認電子郵件不一致。</div>');
+                // $confirm.after('<div class="wpcf7-not-valid-tip">電子郵件與確認電子郵件不一致。</div>');
+                $confirm.after('<div class="wpcf7-not-valid-tip email-confirm-error">電子郵件與確認電子郵件不一致。</div>');
             }
 
             return false;
@@ -111,6 +129,7 @@ jQuery(function ($) {
         const $form = $(this).closest('.contact-form');
 
         $form.addClass('is-confirm');
+        confirmMode = true;
 
         $form.find('input:not([type="submit"]):not([type="hidden"]):not([type="checkbox"]), textarea')
             .prop('readonly', true);
@@ -131,6 +150,7 @@ jQuery(function ($) {
         const $form = $(this).closest('.contact-form');
 
         $form.removeClass('is-confirm');
+        confirmMode = false;
 
         $form.find('input:not([type="submit"]):not([type="hidden"]):not([type="checkbox"]), textarea')
             .prop('readonly', false);
@@ -144,5 +164,18 @@ jQuery(function ($) {
         $form.find('.agree-wrap').css('pointer-events', '');
 
     });
+
+    //Thank You
+    document.addEventListener('wpcf7beforesubmit', function () {
+        confirmMode = false;
+    });
+    document.addEventListener('wpcf7mailsent', function () {
+    $('.contact-form').removeClass('is-confirm');
+        location.href = '/contact/thank-you/';
+    });
+    // document.addEventListener('wpcf7mailfailed', function (event) {
+    //     console.log('測試用:寄信失敗');
+    //     location.href = '/contact/thank-you/';
+    // });
 
 });

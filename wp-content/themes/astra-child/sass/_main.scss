@@ -201,8 +201,11 @@ body {
         textarea  {
             resize: none;      // 不讓使用者拖拉
         }
-        .agree-wrap, hr {
+        .agree-wrap {
             opacity: 0;
+        }
+        hr {
+            display: none;
         }
     }
 }
