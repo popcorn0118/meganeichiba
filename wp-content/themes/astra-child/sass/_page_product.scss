@@ -206,7 +206,10 @@
     display: none;
 
     &.active {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 1 / 1;
     }
 
     img {
@@ -226,6 +229,7 @@
 
 .product-gallery-thumb {
     width: calc(20% - 8px);
+    aspect-ratio: 1 / 1;
     padding: 0;
     border: none;
     background: none;

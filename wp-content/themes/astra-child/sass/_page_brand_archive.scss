@@ -252,8 +252,7 @@
 .lineup-card-image {
     display: none;
     width: 100%;
-    height: 100%;
-
+    aspect-ratio: 1 / 1;
     &.active {
         display: block;
     }
