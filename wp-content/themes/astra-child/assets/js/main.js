@@ -2,35 +2,35 @@ jQuery(function ($) {
 
     function checkEmailMatch($form, showError = false) {
 
-    const $email = $form.find('input[name="your-email"]');
-    const $confirm = $form.find('input[name="your-email-confirm"]');
+        const $email = $form.find('input[name="your-email"]');
+        const $confirm = $form.find('input[name="your-email-confirm"]');
 
-    const email = $.trim($email.val());
-    const confirm = $.trim($confirm.val());
+        const email = $.trim($email.val());
+        const confirm = $.trim($confirm.val());
 
-    // 先清除原本的提示
-    $confirm.removeClass('is-error');
-    $form.find('.wpcf7-not-valid-tip').remove();
+        // 先清除原本的提示
+        $confirm.removeClass('is-error');
+        $form.find('.wpcf7-not-valid-tip').remove();
 
-    // 其中一個沒填，不提示
-    if (!email || !confirm) {
-        return false;
-    }
-
-    // Email 不一致
-    if (email !== confirm) {
-
-        if (showError) {
-            $confirm.addClass('is-error');
-            $confirm.after('<div class="wpcf7-not-valid-tip">電子郵件與確認電子郵件不一致。</div>');
+        // 其中一個沒填，不提示
+        if (!email || !confirm) {
+            return false;
         }
 
-        return false;
-    }
+        // Email 不一致
+        if (email !== confirm) {
 
-    // 一致
-    return true;
-}
+            if (showError) {
+                $confirm.addClass('is-error');
+                $confirm.after('<div class="wpcf7-not-valid-tip">電子郵件與確認電子郵件不一致。</div>');
+            }
+
+            return false;
+        }
+
+        // 一致
+        return true;
+    }
 
     function checkConfirmButton($form) {
 
@@ -70,6 +70,35 @@ jQuery(function ($) {
         $form.find('.confirm-btn').prop('disabled', !valid);
     }
 
+    // ===== textarea 自適應高度 =====
+    function autoResizeTextarea(el) {
+
+        const minHeight = 300;
+
+        el.style.height = 'auto';
+        el.style.height = Math.max(el.scrollHeight, minHeight) + 'px';
+
+    }
+    function fitTextareaContent(el) {
+
+        // 暫時移除固定高度
+        el.style.height = 'auto';
+
+        // 依內容高度設定
+        el.style.height = el.scrollHeight + 'px';
+
+    }
+
+    // 初始化
+    $('textarea').each(function () {
+        autoResizeTextarea(this);
+    });
+
+    // 輸入時自動調整高度
+    $(document).on('input', 'textarea', function () {
+        autoResizeTextarea(this);
+    });
+
     // 一開始檢查一次
     $('.contact-form').each(function () {
         checkConfirmButton($(this));
@@ -103,6 +132,10 @@ jQuery(function ($) {
         $form.find('input:not([type="submit"]):not([type="hidden"]):not([type="checkbox"]), textarea')
             .prop('readonly', true);
 
+        $form.find('textarea').each(function () {
+            fitTextareaContent(this);
+        });
+
         $form.find('select')
             .css('pointer-events', 'none');
 
@@ -120,6 +153,8 @@ jQuery(function ($) {
 
         $form.find('input:not([type="submit"]):not([type="hidden"]), textarea')
             .prop('readonly', false);
+
+            $form.find('textarea').css('height', '300px');
 
         $form.find('select')
             .css('pointer-events', '');

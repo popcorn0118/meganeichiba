@@ -87,24 +87,14 @@ body {
     .submit-btn {
         display: none !important;
     }
-    &.is-confirm {
-
-        .confirm-btn {
-            display: none !important;
-        }
-
-        .correction-btn,
-        .submit-btn {
-            display: inline-flex !important;
-        }
-
-    }
-
     select, input, textarea {
         background-color: #EFEFEF;
         &:focus {
             background-color: #EFEFEF;
         }
+    }
+    textarea {
+        // min-height: 300px;
     }
     p {
         margin: 0;
@@ -192,5 +182,27 @@ body {
 
         }
         
+    }
+    &.is-confirm {
+
+        .confirm-btn {
+            display: none !important;
+        }
+
+        .correction-btn,
+        .submit-btn {
+            display: inline-flex !important;
+        }
+
+        select, input, textarea {
+            background-color: transparent;
+            border: 0;
+        }
+        textarea  {
+            resize: none;      // 不讓使用者拖拉
+        }
+        .agree-wrap {
+            opacity: 0;
+        }
     }
 }

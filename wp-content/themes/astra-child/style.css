@@ -74,13 +74,6 @@ body.translatepress-zh_CN .Noto-Serif, body.translatepress-zh_CN .Noto-Serif * {
 .contact-form .submit-btn {
   display: none !important;
 }
-.contact-form.is-confirm .confirm-btn {
-  display: none !important;
-}
-.contact-form.is-confirm .correction-btn,
-.contact-form.is-confirm .submit-btn {
-  display: inline-flex !important;
-}
 .contact-form select, .contact-form input, .contact-form textarea {
   background-color: #EFEFEF;
 }
@@ -168,6 +161,23 @@ body.translatepress-zh_CN .Noto-Serif, body.translatepress-zh_CN .Noto-Serif * {
   right: 105px;
   top: 50%;
   transform: rotate(135deg) translateX(-50%);
+}
+.contact-form.is-confirm .confirm-btn {
+  display: none !important;
+}
+.contact-form.is-confirm .correction-btn,
+.contact-form.is-confirm .submit-btn {
+  display: inline-flex !important;
+}
+.contact-form.is-confirm select, .contact-form.is-confirm input, .contact-form.is-confirm textarea {
+  background-color: transparent;
+  border: 0;
+}
+.contact-form.is-confirm textarea {
+  resize: none;
+}
+.contact-form.is-confirm .agree-wrap {
+  opacity: 0;
 }
 
 .products-brand-list {
