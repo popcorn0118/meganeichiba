@@ -84,6 +84,9 @@ body.translatepress-zh_CN .Noto-Serif, body.translatepress-zh_CN .Noto-Serif * {
 .contact-form select, .contact-form input, .contact-form textarea {
   background-color: #EFEFEF;
 }
+.contact-form select:focus, .contact-form input:focus, .contact-form textarea:focus {
+  background-color: #EFEFEF;
+}
 .contact-form p {
   margin: 0;
 }
@@ -133,7 +136,7 @@ body.translatepress-zh_CN .Noto-Serif, body.translatepress-zh_CN .Noto-Serif * {
 .contact-form .submit-wrap .confirm-btn:disabled, .contact-form .submit-wrap .correction-btn:disabled, .contact-form .submit-wrap .submit-btn input[type=submit]:disabled {
   opacity: 0.5;
 }
-.contact-form .submit-wrap .confirm-btn:hover, .contact-form .submit-wrap .correction-btn:hover, .contact-form .submit-wrap .submit-btn input[type=submit]:hover {
+.contact-form .submit-wrap .confirm-btn:not(:disabled):hover, .contact-form .submit-wrap .correction-btn:not(:disabled):hover, .contact-form .submit-wrap .submit-btn input[type=submit]:not(:disabled):hover {
   background-color: #434343;
 }
 .contact-form .submit-wrap .confirm-btn br, .contact-form .submit-wrap .correction-btn br, .contact-form .submit-wrap .submit-btn input[type=submit] br {
