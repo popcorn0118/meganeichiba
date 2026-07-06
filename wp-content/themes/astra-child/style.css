@@ -70,6 +70,103 @@ body.translatepress-zh_CN .Noto-Serif, body.translatepress-zh_CN .Noto-Serif * {
   margin-bottom: 0;
 }
 
+.contact-form .correction-btn,
+.contact-form .submit-btn {
+  display: none !important;
+}
+.contact-form.is-confirm .confirm-btn {
+  display: none !important;
+}
+.contact-form.is-confirm .correction-btn,
+.contact-form.is-confirm .submit-btn {
+  display: inline-flex !important;
+}
+.contact-form select, .contact-form input, .contact-form textarea {
+  background-color: #EFEFEF;
+}
+.contact-form p {
+  margin: 0;
+}
+.contact-form .form-item {
+  margin-bottom: 30px;
+}
+.contact-form .title {
+  color: var(--text);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.contact-form .title .required {
+  color: #FF6060;
+}
+.contact-form .form-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.contact-form hr {
+  margin: 20px 0 !important;
+}
+.contact-form .agree-wrap {
+  text-align: left;
+}
+.contact-form .agree-wrap .wpcf7-list-item {
+  margin-left: 0;
+}
+.contact-form .submit-wrap {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+.contact-form .submit-wrap .confirm-btn, .contact-form .submit-wrap .correction-btn, .contact-form .submit-wrap .submit-btn input[type=submit] {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  color: #fff;
+  background-color: var(--text);
+  padding: 15px 30px 15px 50px;
+  border-radius: 50px;
+  font-size: 20px;
+  border: 0;
+  letter-spacing: 5px;
+}
+.contact-form .submit-wrap .confirm-btn:disabled, .contact-form .submit-wrap .correction-btn:disabled, .contact-form .submit-wrap .submit-btn input[type=submit]:disabled {
+  opacity: 0.5;
+}
+.contact-form .submit-wrap .confirm-btn:hover, .contact-form .submit-wrap .correction-btn:hover, .contact-form .submit-wrap .submit-btn input[type=submit]:hover {
+  background-color: #434343;
+}
+.contact-form .submit-wrap .confirm-btn br, .contact-form .submit-wrap .correction-btn br, .contact-form .submit-wrap .submit-btn input[type=submit] br {
+  display: none;
+}
+.contact-form .submit-wrap .icon {
+  border: 4px solid #fff;
+  border-bottom: 4px solid transparent;
+  border-right: 4px solid transparent;
+  display: block;
+  width: 4px;
+  height: 4px;
+  transform: rotate(135deg);
+}
+.contact-form .submit-wrap .correction-btn {
+  padding: 15px 50px 15px 30px;
+}
+.contact-form .submit-wrap .correction-btn .icon {
+  transform: rotate(-45deg);
+}
+.contact-form .submit-wrap .submit-btn {
+  position: relative;
+}
+.contact-form .submit-wrap .submit-btn input[type=submit] {
+  padding-right: 60px;
+}
+.contact-form .submit-wrap .submit-btn .icon {
+  position: absolute;
+  right: 105px;
+  top: 50%;
+  transform: rotate(135deg) translateX(-50%);
+}
+
 .products-brand-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

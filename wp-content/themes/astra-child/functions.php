@@ -39,6 +39,14 @@ function child_enqueue_styles() {
 
     }
 
+     wp_enqueue_script(
+        'main-js',
+        get_stylesheet_directory_uri() . '/assets/js/main.js',
+        [ 'jquery' ],
+        CHILD_THEME_ASTRA_CHILD_VERSION,
+        true
+    );
+
 	wp_enqueue_style( 'astra-child-theme-css', get_stylesheet_directory_uri() . '/style.css', array('astra-theme-css'), CHILD_THEME_ASTRA_CHILD_VERSION, 'all' );
 
 
