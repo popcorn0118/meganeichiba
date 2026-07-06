@@ -201,7 +201,7 @@ body {
         textarea  {
             resize: none;      // 不讓使用者拖拉
         }
-        .agree-wrap {
+        .agree-wrap, hr {
             opacity: 0;
         }
     }

@@ -8,11 +8,11 @@ jQuery(function ($) {
         const email = $.trim($email.val());
         const confirm = $.trim($confirm.val());
 
-        // 先清除原本的提示
+        // 清除原本提示
         $confirm.removeClass('is-error');
         $form.find('.wpcf7-not-valid-tip').remove();
 
-        // 其中一個沒填，不提示
+        // 其中一個沒填
         if (!email || !confirm) {
             return false;
         }
@@ -28,7 +28,6 @@ jQuery(function ($) {
             return false;
         }
 
-        // 一致
         return true;
     }
 
@@ -36,7 +35,7 @@ jQuery(function ($) {
 
         let valid = true;
 
-        // 必填 input、email、textarea
+        // 必填 input、textarea
         $form.find('input[aria-required="true"], textarea[aria-required="true"]').each(function () {
             if ($.trim($(this).val()) === '') {
                 valid = false;
@@ -54,66 +53,50 @@ jQuery(function ($) {
             });
         }
 
-        // 電子郵件一致
+        // Email 一致
         if (valid) {
             valid = checkEmailMatch($form);
         }
 
-        // acceptance
+        // 同意條款
         if (valid) {
-            const checked = $form.find('input[name="privacy-agree"]').prop('checked');
-            if (!checked) {
-                valid = false;
-            }
+            valid = $form.find('input[name="privacy-agree"]').prop('checked');
         }
 
         $form.find('.confirm-btn').prop('disabled', !valid);
     }
 
-    // ===== textarea 自適應高度 =====
-    function autoResizeTextarea(el) {
-
-        const minHeight = 300;
-
-        el.style.height = 'auto';
-        el.style.height = Math.max(el.scrollHeight, minHeight) + 'px';
-
-    }
+    // textarea 依內容高度
     function fitTextareaContent(el) {
-
-        // 暫時移除固定高度
         el.style.height = 'auto';
-
-        // 依內容高度設定
         el.style.height = el.scrollHeight + 'px';
-
     }
 
-    // 初始化
+    // 初始化：固定高度
     $('textarea').each(function () {
-        autoResizeTextarea(this);
+        this.style.height = '300px';
     });
 
-    // 輸入時自動調整高度
-    $(document).on('input', 'textarea', function () {
-        autoResizeTextarea(this);
-    });
-
-    // 一開始檢查一次
+    // 初始化檢查
     $('.contact-form').each(function () {
         checkConfirmButton($(this));
     });
 
-    // 任一欄位變更重新檢查
+    // 欄位變更
     $(document).on(
         'input change',
         '.contact-form input, .contact-form textarea, .contact-form select',
         function () {
-            checkConfirmButton($(this).closest('.contact-form'));
+
+            const $form = $(this).closest('.contact-form');
+
+            checkEmailMatch($form);
+            checkConfirmButton($form);
+
         }
     );
 
-    // Email 離開欄位時檢查並顯示提示
+    // Email 離開欄位提示
     $(document).on(
         'blur',
         'input[name="your-email"], input[name="your-email-confirm"]',
@@ -132,15 +115,13 @@ jQuery(function ($) {
         $form.find('input:not([type="submit"]):not([type="hidden"]):not([type="checkbox"]), textarea')
             .prop('readonly', true);
 
+        // textarea 縮成內容高度
         $form.find('textarea').each(function () {
             fitTextareaContent(this);
         });
 
-        $form.find('select')
-            .css('pointer-events', 'none');
-
-        $form.find('.agree-wrap')
-            .css('pointer-events', 'none');
+        $form.find('select').css('pointer-events', 'none');
+        $form.find('.agree-wrap').css('pointer-events', 'none');
 
     });
 
@@ -151,16 +132,16 @@ jQuery(function ($) {
 
         $form.removeClass('is-confirm');
 
-        $form.find('input:not([type="submit"]):not([type="hidden"]), textarea')
+        $form.find('input:not([type="submit"]):not([type="hidden"]):not([type="checkbox"]), textarea')
             .prop('readonly', false);
 
-            $form.find('textarea').css('height', '300px');
+        // 恢復固定高度
+        $form.find('textarea').each(function () {
+            this.style.height = '300px';
+        });
 
-        $form.find('select')
-            .css('pointer-events', '');
-
-        $form.find('.agree-wrap')
-            .css('pointer-events', '');
+        $form.find('select').css('pointer-events', '');
+        $form.find('.agree-wrap').css('pointer-events', '');
 
     });
 

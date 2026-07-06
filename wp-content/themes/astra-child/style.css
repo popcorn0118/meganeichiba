@@ -176,7 +176,7 @@ body.translatepress-zh_CN .Noto-Serif, body.translatepress-zh_CN .Noto-Serif * {
 .contact-form.is-confirm textarea {
   resize: none;
 }
-.contact-form.is-confirm .agree-wrap {
+.contact-form.is-confirm .agree-wrap, .contact-form.is-confirm hr {
   opacity: 0;
 }
 
