@@ -197,6 +197,20 @@ body {
         select, input, textarea {
             background-color: transparent;
             border: 0;
+            &:-webkit-autofill,
+            &:-webkit-autofill:hover,
+            &:-webkit-autofill:focus {
+                -webkit-box-shadow: 0 0 0 1000px var(--bg) inset !important;
+                -webkit-text-fill-color: inherit !important;
+                transition: background-color 9999s ease-in-out 0s;
+            }
+        }
+        select {
+            //隱藏下拉箭頭
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: none;
         }
         textarea  {
             resize: none;      // 不讓使用者拖拉

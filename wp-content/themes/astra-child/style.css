@@ -173,6 +173,17 @@ body.translatepress-zh_CN .Noto-Serif, body.translatepress-zh_CN .Noto-Serif * {
   background-color: transparent;
   border: 0;
 }
+.contact-form.is-confirm select:-webkit-autofill, .contact-form.is-confirm select:-webkit-autofill:hover, .contact-form.is-confirm select:-webkit-autofill:focus, .contact-form.is-confirm input:-webkit-autofill, .contact-form.is-confirm input:-webkit-autofill:hover, .contact-form.is-confirm input:-webkit-autofill:focus, .contact-form.is-confirm textarea:-webkit-autofill, .contact-form.is-confirm textarea:-webkit-autofill:hover, .contact-form.is-confirm textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px var(--bg) inset !important;
+  -webkit-text-fill-color: inherit !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
+.contact-form.is-confirm select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: none;
+}
 .contact-form.is-confirm textarea {
   resize: none;
 }
