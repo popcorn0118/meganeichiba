@@ -1,7 +1,7 @@
 @use 'variable' as *;
 @use 'mixin' as *;
 
-.child-download {
+.download {
     text-align: center;
     padding: 40px 20px;
 
@@ -46,7 +46,7 @@
     }
 }
 
-.child-download-modal {
+.download-modal {
     position: fixed;
     inset: 0;
     z-index: 9999;
@@ -180,6 +180,6 @@
     }
 }
 
-body.child-download-modal-open {
+body.download-modal-open {
     overflow: hidden;
 }
