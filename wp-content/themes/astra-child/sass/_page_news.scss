@@ -1,0 +1,63 @@
+@use 'variable' as *;
+@use 'mixin' as *;
+
+.products-news-list {
+    width: 100%;
+
+    .products-news-list__items {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .products-news-list__item {
+        border-bottom: 1px solid #e9e9e9;
+
+        &:first-child {
+            border-top: 1px solid #e9e9e9;
+        }
+    }
+
+    .products-news-list__link {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        padding: 20px 0;
+        text-decoration: none;
+        
+        .products-news-list__title {
+            transition: .3s ease;
+        }
+        @include sm() {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 16px 0;
+        }
+
+        &:hover {
+            
+            .products-news-list__title {
+                opacity: .7;
+            }
+        }
+    }
+
+    .products-news-list__date {
+        flex: 0 0 150px;
+        font-size: 16px;
+        color: var(--text);
+        opacity: 0.7;
+        @include sm() {
+                flex: auto;
+        }
+    }
+
+    .products-news-list__title {
+        flex: 1;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.8;
+        color: var(--text);
+    }
+}

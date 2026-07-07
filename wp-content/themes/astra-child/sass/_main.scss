@@ -223,3 +223,21 @@ body {
         }
     }
 }
+
+
+//footer
+footer {
+    ul.menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        li {
+            @include md() {
+                text-align: center;
+            }
+        }
+    }
+}
