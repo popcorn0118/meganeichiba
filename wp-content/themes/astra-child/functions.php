@@ -116,6 +116,7 @@ function child_enqueue_product_single_scripts() {
 add_action( 'wp_enqueue_scripts', 'child_enqueue_product_single_scripts' );
 
 require_once get_stylesheet_directory() . '/inc/ajax-brand-lineup.php';
+require_once get_stylesheet_directory() . '/inc/download-block.php';
 
 
 // 將 ACF「品牌狀態」顯示於 WooCommerce Brands 後台列表
