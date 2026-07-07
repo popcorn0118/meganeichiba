@@ -1040,6 +1040,10 @@ footer ul.menu {
   width: 22px;
   height: 22px;
 }
+.download__ext {
+  font-weight: 400;
+  opacity: 0.8;
+}
 .download__notice {
   max-width: 720px;
   margin: 24px auto 0;

@@ -36,6 +36,48 @@ function download_get_acf_object_id() {
 }
 
 /**
+ * 依 type 欄位解析實際下載網址與檔名
+ *
+ * @param string|int $object_id
+ * @return array{url: string, filename: string}
+ */
+function download_resolve_file( $object_id ) {
+
+	$type = get_field( 'type', $object_id );
+	$file = get_field( 'upload-file', $object_id );
+	$link = get_field( 'file-link', $object_id );
+
+	$file_url = '';
+
+	if ( is_array( $file ) && ! empty( $file['url'] ) ) {
+		$file_url = $file['url'];
+	} elseif ( is_numeric( $file ) ) {
+		$file_url = wp_get_attachment_url( (int) $file );
+	} elseif ( is_string( $file ) && '' !== $file ) {
+		$file_url = $file;
+	}
+
+	// type 若為「link」優先用檔案連結，其餘情況（含 type 回傳格式為 Label 時）以實際有值的欄位為準
+	$url = ( 'link' === $type ) ? ( $link ?: $file_url ) : ( $file_url ?: $link );
+
+	if ( ! $url ) {
+		return [
+			'url'      => '',
+			'filename' => '',
+		];
+	}
+
+	$filename = ( is_array( $file ) && ! empty( $file['filename'] ) )
+		? $file['filename']
+		: basename( wp_parse_url( $url, PHP_URL_PATH ) );
+
+	return [
+		'url'      => $url,
+		'filename' => $filename,
+	];
+}
+
+/**
  * 下載圖示（文件 + 下載箭頭）
  */
 function download_icon() {
@@ -62,12 +104,15 @@ function render_download_block() {
 
 	$download_desc          = get_field( 'download-desc', 'option' );
 	$password_download_desc = get_field( 'password-download-desc', 'option' );
+
+	$file_info = download_resolve_file( $object_id );
+	$extension = $file_info['filename'] ? strtoupper( pathinfo( $file_info['filename'], PATHINFO_EXTENSION ) ) : '';
 	?>
 	<div class="download" data-object-id="<?php echo esc_attr( $object_id ); ?>">
 
 		<button type="button" class="download__trigger">
 			<span class="download__icon"><?php download_icon(); ?></span>
-			<span class="download__label">資料下載(PDF)</span>
+			<span class="download__label">資料下載</span><?php if ( $extension ) : ?><span class="download__ext">(<?php echo esc_html( $extension ); ?>)</span><?php endif; ?>
 		</button>
 
 		<?php if ( $download_desc ) : ?>
@@ -162,33 +207,11 @@ function verify_download_password() {
 		wp_send_json_error( [ 'message' => '密鑰錯誤，請重新輸入' ] );
 	}
 
-	$type = get_field( 'type', $object_id );
-	$file = get_field( 'upload-file', $object_id );
-	$link = get_field( 'file-link', $object_id );
+	$file_info = download_resolve_file( $object_id );
 
-	$file_url = '';
-
-	if ( is_array( $file ) && ! empty( $file['url'] ) ) {
-		$file_url = $file['url'];
-	} elseif ( is_numeric( $file ) ) {
-		$file_url = wp_get_attachment_url( (int) $file );
-	} elseif ( is_string( $file ) && '' !== $file ) {
-		$file_url = $file;
-	}
-
-	// type 若為「link」優先用檔案連結，其餘情況（含 type 回傳格式為 Label 時）以實際有值的欄位為準
-	$url = ( 'link' === $type ) ? ( $link ?: $file_url ) : ( $file_url ?: $link );
-
-	if ( ! $url ) {
+	if ( ! $file_info['url'] ) {
 		wp_send_json_error( [ 'message' => '目前無可下載的檔案' ] );
 	}
 
-	$filename = ( is_array( $file ) && ! empty( $file['filename'] ) )
-		? $file['filename']
-		: basename( wp_parse_url( $url, PHP_URL_PATH ) );
-
-	wp_send_json_success( [
-		'url'      => $url,
-		'filename' => $filename,
-	] );
+	wp_send_json_success( $file_info );
 }
