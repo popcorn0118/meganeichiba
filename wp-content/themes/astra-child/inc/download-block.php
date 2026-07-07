@@ -163,17 +163,21 @@ function verify_download_password() {
 	}
 
 	$type = get_field( 'type', $object_id );
-	$url  = '';
+	$file = get_field( 'upload-file', $object_id );
+	$link = get_field( 'file-link', $object_id );
 
-	if ( 'file' === $type ) {
-		$file = get_field( 'upload-file', $object_id );
+	$file_url = '';
 
-		if ( is_array( $file ) && ! empty( $file['url'] ) ) {
-			$url = $file['url'];
-		}
-	} elseif ( 'link' === $type ) {
-		$url = get_field( 'file-link', $object_id );
+	if ( is_array( $file ) && ! empty( $file['url'] ) ) {
+		$file_url = $file['url'];
+	} elseif ( is_numeric( $file ) ) {
+		$file_url = wp_get_attachment_url( (int) $file );
+	} elseif ( is_string( $file ) && '' !== $file ) {
+		$file_url = $file;
 	}
+
+	// type 若為「link」優先用檔案連結，其餘情況（含 type 回傳格式為 Label 時）以實際有值的欄位為準
+	$url = ( 'link' === $type ) ? ( $link ?: $file_url ) : ( $file_url ?: $link );
 
 	if ( ! $url ) {
 		wp_send_json_error( [ 'message' => '目前無可下載的檔案' ] );

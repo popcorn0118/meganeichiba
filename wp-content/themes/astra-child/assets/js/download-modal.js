@@ -71,7 +71,7 @@
 					}
 
 					var formData = new FormData();
-					formData.append('action', 'child_verify_download_password');
+					formData.append('action', 'verify_download_password');
 					formData.append('nonce', ChildDownload.nonce);
 					formData.append('object_id', objectId);
 					formData.append('password', input.value);
