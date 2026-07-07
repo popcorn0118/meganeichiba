@@ -3,19 +3,19 @@
 
 	document.addEventListener('DOMContentLoaded', function () {
 
-		var wrappers = document.querySelectorAll('.popcorn-download');
+		var wrappers = document.querySelectorAll('.child-download');
 
 		wrappers.forEach(function (wrapper) {
 
 			var objectId  = wrapper.getAttribute('data-object-id');
-			var trigger   = wrapper.querySelector('.popcorn-download__trigger');
-			var modal     = wrapper.querySelector('.popcorn-download-modal');
-			var overlay   = wrapper.querySelector('.popcorn-download-modal__overlay');
-			var closeBtn  = wrapper.querySelector('.popcorn-download-modal__close');
-			var form      = wrapper.querySelector('.popcorn-download-modal__form');
-			var input     = wrapper.querySelector('.popcorn-download-modal__input');
-			var errorMsg  = wrapper.querySelector('.popcorn-download-modal__error');
-			var submitBtn = wrapper.querySelector('.popcorn-download-modal__submit');
+			var trigger   = wrapper.querySelector('.child-download__trigger');
+			var modal     = wrapper.querySelector('.child-download-modal');
+			var overlay   = wrapper.querySelector('.child-download-modal__overlay');
+			var closeBtn  = wrapper.querySelector('.child-download-modal__close');
+			var form      = wrapper.querySelector('.child-download-modal__form');
+			var input     = wrapper.querySelector('.child-download-modal__input');
+			var errorMsg  = wrapper.querySelector('.child-download-modal__error');
+			var submitBtn = wrapper.querySelector('.child-download-modal__submit');
 
 			if (!trigger || !modal) {
 				return;
@@ -24,7 +24,7 @@
 			function openModal() {
 				modal.classList.add('is-active');
 				modal.setAttribute('aria-hidden', 'false');
-				document.body.classList.add('popcorn-download-modal-open');
+				document.body.classList.add('child-download-modal-open');
 
 				if (errorMsg) {
 					errorMsg.hidden = true;
@@ -39,7 +39,7 @@
 			function closeModal() {
 				modal.classList.remove('is-active');
 				modal.setAttribute('aria-hidden', 'true');
-				document.body.classList.remove('popcorn-download-modal-open');
+				document.body.classList.remove('child-download-modal-open');
 			}
 
 			trigger.addEventListener('click', openModal);
@@ -71,12 +71,12 @@
 					}
 
 					var formData = new FormData();
-					formData.append('action', 'popcorn_verify_download_password');
-					formData.append('nonce', PopcornDownload.nonce);
+					formData.append('action', 'child_verify_download_password');
+					formData.append('nonce', ChildDownload.nonce);
 					formData.append('object_id', objectId);
 					formData.append('password', input.value);
 
-					fetch(PopcornDownload.ajax_url, {
+					fetch(ChildDownload.ajax_url, {
 						method: 'POST',
 						credentials: 'same-origin',
 						body: formData

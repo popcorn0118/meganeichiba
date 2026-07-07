@@ -1011,11 +1011,11 @@ footer ul.menu {
   color: var(--text);
 }
 
-.popcorn-download {
+.child-download {
   text-align: center;
   padding: 40px 20px;
 }
-.popcorn-download__trigger {
+.child-download__trigger {
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -1029,28 +1029,28 @@ footer ul.menu {
   cursor: pointer;
   transition: 0.3s;
 }
-.popcorn-download__trigger:hover {
+.child-download__trigger:hover {
   background-color: #2a2a2a;
 }
-.popcorn-download__icon {
+.child-download__icon {
   display: inline-flex;
   line-height: 0;
 }
-.popcorn-download__icon svg {
+.child-download__icon svg {
   width: 22px;
   height: 22px;
 }
-.popcorn-download__notice {
+.child-download__notice {
   max-width: 720px;
   margin: 24px auto 0;
   font-size: 14px;
   line-height: 1.9;
 }
-.popcorn-download__notice p {
+.child-download__notice p {
   margin: 0;
 }
 
-.popcorn-download-modal {
+.child-download-modal {
   position: fixed;
   inset: 0;
   z-index: 9999;
@@ -1058,15 +1058,15 @@ footer ul.menu {
   align-items: center;
   justify-content: center;
 }
-.popcorn-download-modal.is-active {
+.child-download-modal.is-active {
   display: flex;
 }
-.popcorn-download-modal__overlay {
+.child-download-modal__overlay {
   position: absolute;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.6);
 }
-.popcorn-download-modal__box {
+.child-download-modal__box {
   position: relative;
   width: 100%;
   max-width: 480px;
@@ -1077,11 +1077,11 @@ footer ul.menu {
   text-align: center;
 }
 @media screen and (max-width: 576px) {
-  .popcorn-download-modal__box {
+  .child-download-modal__box {
     padding: 30px 20px;
   }
 }
-.popcorn-download-modal__close {
+.child-download-modal__close {
   position: absolute;
   top: 16px;
   right: 16px;
@@ -1097,22 +1097,22 @@ footer ul.menu {
   line-height: 1;
   cursor: pointer;
 }
-.popcorn-download-modal__close:hover {
+.child-download-modal__close:hover {
   opacity: 0.7;
 }
-.popcorn-download-modal__title {
+.child-download-modal__title {
   color: #fff;
   font-size: 22px;
   font-weight: 700;
   margin: 0 0 24px;
 }
-.popcorn-download-modal__form {
+.child-download-modal__form {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
 }
-.popcorn-download-modal__input {
+.child-download-modal__input {
   width: 100%;
   background-color: #e0e0e0;
   border: 0;
@@ -1122,23 +1122,23 @@ footer ul.menu {
   font-size: 16px;
   letter-spacing: 4px;
 }
-.popcorn-download-modal__input:focus {
+.child-download-modal__input:focus {
   outline: 2px solid #fff;
 }
-.popcorn-download-modal__desc {
+.child-download-modal__desc {
   color: #fff;
   font-size: 13px;
   line-height: 1.8;
   margin-top: -8px;
 }
-.popcorn-download-modal__desc a {
+.child-download-modal__desc a {
   color: #fff;
   text-decoration: underline;
 }
-.popcorn-download-modal__desc p {
+.child-download-modal__desc p {
   margin: 0;
 }
-.popcorn-download-modal__submit {
+.child-download-modal__submit {
   width: 56px;
   height: 56px;
   display: flex;
@@ -1151,24 +1151,24 @@ footer ul.menu {
   cursor: pointer;
   transition: 0.3s;
 }
-.popcorn-download-modal__submit:hover {
+.child-download-modal__submit:hover {
   opacity: 0.85;
 }
-.popcorn-download-modal__submit:disabled {
+.child-download-modal__submit:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
-.popcorn-download-modal__submit svg {
+.child-download-modal__submit svg {
   width: 24px;
   height: 24px;
 }
-.popcorn-download-modal__error {
+.child-download-modal__error {
   color: #ff6060;
   font-size: 13px;
   margin: 0;
 }
 
-body.popcorn-download-modal-open {
+body.child-download-modal-open {
   overflow: hidden;
 }
 

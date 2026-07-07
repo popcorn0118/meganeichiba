@@ -1,7 +1,7 @@
 @use 'variable' as *;
 @use 'mixin' as *;
 
-.popcorn-download {
+.child-download {
     text-align: center;
     padding: 40px 20px;
 
@@ -46,7 +46,7 @@
     }
 }
 
-.popcorn-download-modal {
+.child-download-modal {
     position: fixed;
     inset: 0;
     z-index: 9999;
@@ -180,6 +180,6 @@
     }
 }
 
-body.popcorn-download-modal-open {
+body.child-download-modal-open {
     overflow: hidden;
 }
