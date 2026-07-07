@@ -155,7 +155,25 @@ add_filter( 'manage_product_brand_custom_column', function( $content, $column_na
 
 }, 10, 3 );
 
+// 新增 ACF 全站設定頁面
+add_action( 'acf/init', 'popcorn_add_acf_options_page' );
 
+function popcorn_add_acf_options_page() {
+
+    if ( ! function_exists( 'acf_add_options_page' ) ) {
+        return;
+    }
+
+    acf_add_options_page( array(
+        'page_title' => '全站設定',
+        'menu_title' => '全站設定',
+        'menu_slug'  => 'website-setting-page',
+        'capability' => 'manage_options',
+        'icon_url'   => 'dashicons-admin-generic',
+        'position'   => 60,
+        'redirect'   => false,
+    ) );
+}
 
 
 /* =================================
