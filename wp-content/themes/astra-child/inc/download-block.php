@@ -183,5 +183,12 @@ function verify_download_password() {
 		wp_send_json_error( [ 'message' => '目前無可下載的檔案' ] );
 	}
 
-	wp_send_json_success( [ 'url' => $url ] );
+	$filename = ( is_array( $file ) && ! empty( $file['filename'] ) )
+		? $file['filename']
+		: basename( wp_parse_url( $url, PHP_URL_PATH ) );
+
+	wp_send_json_success( [
+		'url'      => $url,
+		'filename' => $filename,
+	] );
 }

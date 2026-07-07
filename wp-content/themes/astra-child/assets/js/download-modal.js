@@ -86,7 +86,12 @@
 						})
 						.then(function (res) {
 							if (res.success && res.data && res.data.url) {
-								window.location.href = res.data.url;
+								var link = document.createElement('a');
+								link.href = res.data.url;
+								link.download = res.data.filename || '';
+								document.body.appendChild(link);
+								link.click();
+								document.body.removeChild(link);
 								closeModal();
 								return;
 							}
