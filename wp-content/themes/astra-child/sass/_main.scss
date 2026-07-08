@@ -36,6 +36,13 @@ body {
         font-size: 18px;
     }
 }
+.no-br {
+    @include md() {
+        br {
+            display: none;
+        }
+    }
+}
 
 /*
 * Header

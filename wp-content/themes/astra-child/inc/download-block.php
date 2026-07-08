@@ -82,10 +82,8 @@ function download_resolve_file( $object_id ) {
  */
 function download_icon() {
 	?>
-	<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-		<path d="M6 2h8l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor" opacity="0.15" />
-		<path d="M6 2h8l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="1.5" />
-		<path d="M12 8v7m0 0-2.5-2.5M12 15l2.5-2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+	<svg xmlns="http://www.w3.org/2000/svg" width="29" height="36" viewBox="0 0 29 36" fill="none">
+		<path d="M14.5 0L14.7121 0.0125999C15.1166 0.0599829 15.4934 0.241343 15.7814 0.52742C16.0695 0.813498 16.2521 1.18761 16.2998 1.5894L16.3125 1.8V9L16.3216 9.27C16.3864 10.1271 16.7579 10.9329 17.3689 11.5417C17.9799 12.1504 18.7901 12.522 19.6529 12.5892L19.9375 12.6H27.1875L27.3996 12.6126C27.8041 12.66 28.1809 12.8413 28.4689 13.1274C28.757 13.4135 28.9396 13.7876 28.9873 14.1894L29 14.4V30.6C29.0001 31.9774 28.4702 33.3027 27.5187 34.3049C26.5672 35.307 25.2661 35.9102 23.8815 35.991L23.5625 36H5.4375C4.05056 36.0001 2.716 35.4738 1.7069 34.5289C0.6978 33.584 0.0904301 32.2918 0.00906272 30.9168L8.44706e-09 30.6V5.4C-7.72519e-05 4.02262 0.529839 2.69727 1.48133 1.69513C2.43281 0.692988 3.73394 0.0898065 5.1185 0.00900021L5.4375 0H14.5ZM14.5 14.4C14.0193 14.4 13.5583 14.5896 13.2184 14.9272C12.8785 15.2648 12.6875 15.7226 12.6875 16.2V22.653L11.2502 21.2274C10.9381 20.9175 10.5228 20.7313 10.0824 20.7038C9.64188 20.6763 9.20642 20.8093 8.85769 21.078L8.68731 21.2274C8.34752 21.5649 8.15664 22.0227 8.15664 22.5C8.15664 22.9773 8.34752 23.435 8.68731 23.7726L13.2186 28.2726L13.2983 28.3482L13.4216 28.4472L13.6209 28.575L13.8276 28.6722L14.0179 28.7352L14.2898 28.7892L14.5 28.8L14.7121 28.7874L14.9241 28.7514L15.1199 28.692L15.2667 28.6308L15.4443 28.5372L15.6111 28.422L15.7814 28.2726L20.3127 23.7726C20.6525 23.435 20.8434 22.9773 20.8434 22.5C20.8434 22.0227 20.6525 21.5649 20.3127 21.2274L20.1423 21.078C19.7936 20.8093 19.3581 20.6763 18.9176 20.7038C18.4772 20.7313 18.0619 20.9175 17.7498 21.2274L16.3125 22.6512V16.2C16.3124 15.7591 16.1495 15.3336 15.8545 15.0041C15.5595 14.6747 15.153 14.4642 14.7121 14.4126L14.5 14.4ZM19.9357 1.7982L27.1875 9H19.9375L19.9357 1.7982Z" fill="white"/>
 	</svg>
 	<?php
 }
@@ -112,7 +110,7 @@ function render_download_block() {
 
 		<button type="button" class="download__trigger">
 			<span class="download__icon"><?php download_icon(); ?></span>
-			<span class="download__label">資料下載</span><?php if ( $extension ) : ?><span class="download__ext">(<?php echo esc_html( $extension ); ?>)</span><?php endif; ?>
+			<span class="download__label">資料下載<?php if ( $extension ) : ?><span class="download__ext">(<?php echo esc_html( $extension ); ?>)</span><?php endif; ?></span>
 		</button>
 
 		<?php if ( $download_desc ) : ?>
@@ -135,7 +133,7 @@ function render_download_block() {
 					<?php endif; ?>
 
 					<button type="submit" class="download-modal__submit" aria-label="下載">
-						<?php download_icon(); ?>
+						<?php download_icon(); ?> 下載
 					</button>
 
 					<p class="download-modal__error" hidden></p>
