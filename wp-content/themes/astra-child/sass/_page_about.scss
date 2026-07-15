@@ -84,3 +84,37 @@
     }
    
 }
+
+// UNCOMPROMISHING QUALITY 
+body.page-id-2289 {
+    // 英文版版面調整 (/en/quality/)
+    &.translatepress-en_US {
+        .title {
+            word-break: keep-all;
+            overflow-wrap: normal;
+            --container-widget-width: 100%;
+        }
+        .sub-title {
+        }
+        .desc {}
+        @media (min-width: $lg) {
+            
+            .product-development {
+                .sub-title {
+                    letter-spacing: 1px;
+                }
+            }
+            .the-designt {}
+            .manufacturingt {
+                .sub-title {
+                    letter-spacing: 0.9px;
+                }
+                .desc {
+                    letter-spacing: 1px;
+                }
+            }
+            .quality-assurancet {}   
+        }
+        
+    }
+}

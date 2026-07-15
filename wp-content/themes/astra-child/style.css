@@ -378,6 +378,23 @@ footer ul.menu {
   }
 }
 
+body.page-id-2289.translatepress-en_US .title {
+  word-break: keep-all;
+  overflow-wrap: normal;
+  --container-widget-width: 100%;
+}
+@media (min-width: 1024px) {
+  body.page-id-2289.translatepress-en_US .product-development .sub-title {
+    letter-spacing: 1px;
+  }
+  body.page-id-2289.translatepress-en_US .manufacturingt .sub-title {
+    letter-spacing: 0.9px;
+  }
+  body.page-id-2289.translatepress-en_US .manufacturingt .desc {
+    letter-spacing: 1px;
+  }
+}
+
 .tax-product_brand .ast-container {
   max-width: 100% !important;
   padding-left: 0 !important;
