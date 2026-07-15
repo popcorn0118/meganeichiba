@@ -1027,7 +1027,7 @@ footer ul.menu {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  width: 280px;
+  min-width: 280px;
   max-width: 100%;
   background-color: var(--primary);
   color: #fff;

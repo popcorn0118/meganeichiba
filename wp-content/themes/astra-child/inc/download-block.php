@@ -110,7 +110,7 @@ function render_download_block() {
 
 		<button type="button" class="download__trigger">
 			<span class="download__icon"><?php download_icon(); ?></span>
-			<span class="download__label">資料下載<?php if ( $extension ) : ?><span class="download__ext">(<?php echo esc_html( $extension ); ?>)</span><?php endif; ?></span>
+			<span class="download__label">下載本頁<?php if ( $extension ) : ?><span class="download__ext">(<?php echo esc_html( $extension ); ?>)</span><?php endif; ?></span>
 		</button>
 
 		<?php if ( $download_desc ) : ?>
@@ -123,7 +123,7 @@ function render_download_block() {
 			<div class="download-modal__box" role="dialog" aria-modal="true" aria-labelledby="download-modal-title">
 				<button type="button" class="download-modal__close" aria-label="關閉">&times;</button>
 
-				<h3 id="download-modal-title" class="download-modal__title">資料下載</h3>
+				<h3 id="download-modal-title" class="download-modal__title">下載密碼</h3>
 
 				<form class="download-modal__form" autocomplete="off">
 					<input type="password" name="download_password" class="download-modal__input" autocomplete="new-password" aria-label="下載密鑰">
