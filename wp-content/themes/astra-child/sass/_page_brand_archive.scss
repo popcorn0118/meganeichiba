@@ -301,6 +301,20 @@
             box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--dot-color, var(--primary));
         }
     }
+
+    // 白底頁面：色票值為白色時（不分大小寫，含 #fff / #ffffff / white 等寫法）加上外框避免與背景融合
+    @each $white-value in '#fff;', '#ffffff;', 'white;' {
+        &[style*="--dot-color: #{$white-value}" i] {
+            &::before {
+                border: 1px solid #d9d9d9;
+            }
+
+            // active 的外圈原本用 --dot-color 畫，白色會跟背景融成看不到，改用跟 border 一樣的灰色
+            &.active::before {
+                box-shadow: 0 0 0 2px #fff, 0 0 0 3px #d9d9d9;
+            }
+        }
+    }
 }
 
 .lineup-card-title {

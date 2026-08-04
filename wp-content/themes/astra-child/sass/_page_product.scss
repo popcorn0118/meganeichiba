@@ -108,6 +108,19 @@
     background: var(--dot-color, #ccc);
     transition: box-shadow .3s ease;
 
+    // 白底頁面：色票值為白色時（不分大小寫，含 #fff / #ffffff / white 等寫法）加上外框避免與背景融合
+    @each $white-value in '#fff;', '#ffffff;', 'white;' {
+        &[style*="--dot-color: #{$white-value}" i] {
+            border: 1px solid #d9d9d9;
+
+            // active/hover 的外圈原本用 --dot-color 畫，白色會跟背景融成看不到，改用跟 border 一樣的灰色
+            &.active,
+            &:hover {
+                box-shadow: 0 0 0 2px #fff, 0 0 0 3px #d9d9d9;
+            }
+        }
+    }
+
     &.active,
     &:hover {
         box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--dot-color, var(--primary));
