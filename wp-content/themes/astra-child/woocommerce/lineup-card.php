@@ -47,7 +47,11 @@ $first_color = ltrim( $slides[0]['color'] ?? '', '#' );
 $permalink   = get_permalink();
 ?>
 
-<article class="lineup-card" data-permalink="<?= esc_url( $permalink ); ?>">
+<a
+    class="lineup-card"
+    href="<?= esc_url( $first_color ? $permalink . '?color=' . $first_color : $permalink ); ?>"
+    data-permalink="<?= esc_url( $permalink ); ?>"
+>
 
     <div class="lineup-card-images">
 
@@ -67,37 +71,33 @@ $permalink   = get_permalink();
 
         <?php endif; ?>
 
-        <?php if ( count( $slides ) > 1 ) : ?>
-
-            <div class="lineup-card-dots">
-
-                <?php foreach ( $slides as $i => $slide ) : ?>
-
-                    <button
-                        type="button"
-                        class="lineup-card-dot<?= 0 === $i ? ' active' : ''; ?>"
-                        data-index="<?= esc_attr( $i ); ?>"
-                        data-color="<?= esc_attr( ltrim( $slide['color'], '#' ) ); ?>"
-                        <?php if ( $slide['color'] ) : ?>
-                            style="--dot-color: <?= esc_attr( $slide['color'] ); ?>;"
-                        <?php endif; ?>
-                    ></button>
-
-                <?php endforeach; ?>
-
-            </div>
-
-        <?php endif; ?>
-
     </div>
 
     <h3 class="lineup-card-title">
-        <!--<?= esc_html( get_the_title() ); ?>-->
-         <a
-            class="lineup-card-link"
-            href="<?= esc_url( $first_color ? $permalink . '?color=' . $first_color : $permalink ); ?>"
-        ><?= esc_html( get_the_title() ); ?></a> 
+        <span class="lineup-card-link"><?= esc_html( get_the_title() ); ?></span>
     </h3>
+
+    <?php if ( count( $slides ) > 1 ) : ?>
+
+        <div class="lineup-card-dots">
+
+            <?php foreach ( $slides as $i => $slide ) : ?>
+
+                <button
+                    type="button"
+                    class="lineup-card-dot<?= 0 === $i ? ' active' : ''; ?>"
+                    data-index="<?= esc_attr( $i ); ?>"
+                    data-color="<?= esc_attr( ltrim( $slide['color'], '#' ) ); ?>"
+                    <?php if ( $slide['color'] ) : ?>
+                        style="--dot-color: <?= esc_attr( $slide['color'] ); ?>;"
+                    <?php endif; ?>
+                ></button>
+
+            <?php endforeach; ?>
+
+        </div>
+
+    <?php endif; ?>
 
     <?php if ( $product->get_description() ) : ?>
 
@@ -111,4 +111,4 @@ $permalink   = get_permalink();
         <?= $product->get_price_html(); ?>
     </div>
 
-</article>
+</a>

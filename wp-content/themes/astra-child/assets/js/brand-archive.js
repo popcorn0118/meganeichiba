@@ -54,10 +54,10 @@ jQuery( function ( $ ) {
     }
 
     // 商品圖片輪播：切換到指定 index
-    function goToSlide( $images, index ) {
+    function goToSlide( $card, index ) {
 
-        var $slides = $images.find( '.lineup-card-image' );
-        var $dots   = $images.find( '.lineup-card-dot' );
+        var $slides = $card.find( '.lineup-card-image' );
+        var $dots   = $card.find( '.lineup-card-dot' );
         var total   = $slides.length;
 
         if ( total < 2 ) {
@@ -69,70 +69,21 @@ jQuery( function ( $ ) {
         $slides.removeClass( 'active' ).eq( index ).addClass( 'active' );
         $dots.removeClass( 'active' ).eq( index ).addClass( 'active' );
 
-        // 同步商品連結的 ?color= 參數
-        var $card      = $images.closest( '.lineup-card' );
-        var permalink  = $card.data( 'permalink' );
-        var color      = $dots.eq( index ).data( 'color' );
+        // 同步整張卡片連結（<a>）要導向的 ?color= 參數
+        var permalink = $card.data( 'permalink' );
+        var color     = $dots.eq( index ).data( 'color' );
 
         if ( permalink ) {
-            $card.find( '.lineup-card-link' ).attr(
-                'href',
-                color ? permalink + '?color=' + color : permalink
-            );
+            $card.attr( 'href', color ? permalink + '?color=' + color : permalink );
         }
     }
 
     // dot 點擊切換（事件委派，支援 AJAX 換入的商品卡）
-    $( document ).on( 'click', '.lineup-card-dot', function () {
-        goToSlide( $( this ).closest( '.lineup-card-images' ), $( this ).data( 'index' ) );
-    } );
-
-    // 拖曳／滑動圖片切換（事件委派，支援 AJAX 換入的商品卡）
-    var drag = null;
-
-    $( document ).on( 'pointerdown', '.lineup-card-images', function ( e ) {
-
-        var $images = $( this );
-
-        if ( $images.find( '.lineup-card-image' ).length < 2 ) {
-            return;
-        }
-
-        drag = {
-            $images: $images,
-            startX: e.originalEvent.clientX,
-            moved: false
-        };
-    } );
-
-    $( document ).on( 'pointermove', function ( e ) {
-
-        if ( ! drag ) {
-            return;
-        }
-
-        if ( Math.abs( e.originalEvent.clientX - drag.startX ) > 5 ) {
-            drag.moved = true;
-        }
-    } );
-
-    $( document ).on( 'pointerup pointercancel', function ( e ) {
-
-        if ( ! drag ) {
-            return;
-        }
-
-        var deltaX = e.originalEvent.clientX - drag.startX;
-
-        if ( drag.moved && Math.abs( deltaX ) > 40 ) {
-
-            var $images = drag.$images;
-            var current = $images.find( '.lineup-card-image.active' ).index();
-
-            goToSlide( $images, deltaX < 0 ? current + 1 : current - 1 );
-        }
-
-        drag = null;
+    // preventDefault 避免觸發外層 .lineup-card（<a>）的預設跳轉行為；stopPropagation 避免事件冒泡
+    $( document ).on( 'click', '.lineup-card-dot', function ( e ) {
+        e.preventDefault();
+        e.stopPropagation();
+        goToSlide( $( this ).closest( '.lineup-card' ), $( this ).data( 'index' ) );
     } );
 
 } );
