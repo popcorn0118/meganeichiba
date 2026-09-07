@@ -19,6 +19,21 @@
     text-align: center;
 }
 
+.brand-card--clickable {
+    position: relative;
+    cursor: pointer;
+
+    .brand-card-button::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+    }
+
+    &:hover .brand-card-image img {
+        transform: scale(1.05);
+    }
+}
+
 .brand-card-image {
     position: relative;
     overflow: hidden;

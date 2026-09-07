@@ -43,7 +43,7 @@ if ( empty( $brands ) || is_wp_error( $brands ) ) {
 
     ?>
 
-        <article class="brand-card">
+        <article class="brand-card<?= $status === 'public' ? ' brand-card--clickable' : ''; ?>">
 
             <div class="brand-card-image">
 
