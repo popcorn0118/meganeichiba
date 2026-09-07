@@ -252,6 +252,9 @@
             opacity: .7;
         }
     }
+    &:active, &:focus {
+        outline: none;
+    }
 }
 
 .lineup-card-images {
