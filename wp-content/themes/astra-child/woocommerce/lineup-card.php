@@ -14,7 +14,7 @@ if ( ! $product ) {
 
 $slides = [];
 
-// ACF 重複器 product-color：color-value（色票色）+ color-image（商品列表主圖）
+// ACF 重複器 product-color：color-value（色票色）+ color-image（商品列表主圖）+ color-code（色號文字，如 BK / AG）
 $color_rows = get_field( 'product-color' ) ?: [];
 
 
@@ -29,6 +29,7 @@ foreach ( $color_rows as $row ) {
     $slides[] = [
         'image_id' => $image['ID'],
         'color'    => $row['color-value'] ?: '',
+        'code'     => $row['color-code'] ?: '',
     ];
 }
 
@@ -37,6 +38,7 @@ if ( empty( $slides ) && $product->get_image_id() ) {
     $slides[] = [
         'image_id' => $product->get_image_id(),
         'color'    => '',
+        'code'     => '',
     ];
 }
 
@@ -73,39 +75,47 @@ $permalink   = get_permalink();
 
     </div>
 
-    <h3 class="lineup-card-title">
-        <span class="lineup-card-link"><?= esc_html( get_the_title() ); ?></span>
-    </h3>
+    <dl class="lineup-card-model-info">
 
-    <?php if ( count( $slides ) > 1 ) : ?>
-
-        <div class="lineup-card-dots">
-
-            <?php foreach ( $slides as $i => $slide ) : ?>
-
-                <button
-                    type="button"
-                    class="lineup-card-dot<?= 0 === $i ? ' active' : ''; ?>"
-                    data-index="<?= esc_attr( $i ); ?>"
-                    data-color="<?= esc_attr( ltrim( $slide['color'], '#' ) ); ?>"
-                    <?php if ( $slide['color'] ) : ?>
-                        style="--dot-color: <?= esc_attr( $slide['color'] ); ?>;"
-                    <?php endif; ?>
-                ></button>
-
-            <?php endforeach; ?>
-
+        <div class="lineup-card-model-info-row">
+            <dt>型號</dt>
+            <dd class="lineup-card-link"><?= esc_html( get_the_title() ); ?></dd>
         </div>
 
-    <?php endif; ?>
+        <?php if ( count( $slides ) > 1 ) : ?>
 
-    <?php if ( $product->get_description() ) : ?>
+            <div class="lineup-card-model-info-row">
+                <dt>色號</dt>
+                <dd>
 
-        <div class="lineup-card-desc">
-            <?= wp_kses_post( wpautop( $product->get_description() ) ); ?>
-        </div>
+                    <div class="lineup-card-dots">
 
-    <?php endif; ?>
+                        <?php foreach ( $slides as $i => $slide ) : ?>
+
+                            <button
+                                type="button"
+                                class="lineup-card-dot<?= 0 === $i ? ' active' : ''; ?>"
+                                data-index="<?= esc_attr( $i ); ?>"
+                                data-color="<?= esc_attr( ltrim( $slide['color'], '#' ) ); ?>"
+                                <?php if ( $slide['color'] ) : ?>
+                                    style="--dot-color: <?= esc_attr( $slide['color'] ); ?>;"
+                                <?php endif; ?>
+                            ><span class="lineup-card-dot-label"><?= esc_html( $slide['code'] ); ?></span></button>
+
+                        <?php endforeach; ?>
+
+                    </div>
+
+                </dd>
+            </div>
+
+        <?php endif; ?>
+
+    </dl>
+
+    <span class="lineup-card-viewmore brand-card-button">
+        <i aria-hidden="true" class="fas fa-caret-right"></i> View More
+    </span>
 
     <div class="lineup-card-price">
         <?= $product->get_price_html(); ?>

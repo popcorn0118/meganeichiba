@@ -237,10 +237,10 @@
 
 // LINEUP 商品卡
 .lineup-card {
-    // grid item 預設 min-width: auto，會被內部圖片的原始尺寸撐開導致整個 grid 破版
     min-width: 0;
-    display: block;
-    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-decoration: none;
 
     &:hover {
@@ -281,17 +281,54 @@
     }
 }
 
+// 型號 / 色號
+.lineup-card-model-info {
+    margin-top: 25px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.lineup-card-model-info-row {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 4px 0;
+
+    dt {
+        color: var(--primary-h);
+        font-weight: 400;
+
+        &::after {
+            content: '：';
+        }
+    }
+
+    dd {
+        margin: 0;
+        font-weight: 500;
+    }
+}
+
 .lineup-card-dots {
-    position: relative;
-    margin-top: 15px;
     display: flex;
     justify-content: center;
-    gap: 0;
+    align-items: center;
+    gap: 6px;
 }
 
 .lineup-card-dot {
-    padding: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 6px;
     border: 0;
+    background: none;
+    font-family: inherit;
+    font-size: 15px;
+    cursor: pointer;
+
     &::before {
         content: '';
         display: block;
@@ -300,18 +337,11 @@
         border: none;
         border-radius: 50%;
         background: var(--dot-color, #ccc);
-        cursor: pointer;
         transition: box-shadow .3s ease;
     }
-    &:hover, &:focus {
-        &::before {
-            background: var(--dot-color, #ccc);
-        }
-    }
-    &.active {
-        &::before {
-            box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--dot-color, var(--primary));
-        }
+
+    &.active::before {
+        box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--dot-color, var(--primary));
     }
 
     // 白底頁面：色票值為白色時（不分大小寫，含 #fff / #ffffff / white 等寫法）加上外框避免與背景融合
@@ -329,11 +359,14 @@
     }
 }
 
-.lineup-card-title {
-    margin-top: 25px;
-    font-size: 20px;
-    letter-spacing: .05em;
-    text-align: center;
+// 未選取狀態的色號文字用淺灰色，選取中則跟品牌文字色一致
+.lineup-card-dot-label {
+    color: #999;
+    transition: color .3s ease;
+}
+
+.lineup-card-dot.active .lineup-card-dot-label {
+    color: #333333;
 }
 
 .lineup-card-link {
@@ -341,15 +374,11 @@
     transition: opacity .3s ease;
 }
 
-.lineup-card-desc {
-    // @include word-count(2);
-    margin-top: 10px;
-    line-height: 1.8;
-    text-align: center;
-    p {
-        margin: 0;
-        word-break: break-all;
-    }
+// View More：沿用首頁 .brand-card-button 樣式，這裡只需要讓它在卡片內置中
+.lineup-card-viewmore {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
 }
 
 .lineup-card-price {

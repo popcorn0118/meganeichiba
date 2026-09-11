@@ -656,8 +656,9 @@ body.page-id-2289.translatepress-en_US .title {
 
 .lineup-card {
   min-width: 0;
-  display: block;
-  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-decoration: none;
 }
 .lineup-card:hover .lineup-card-image img {
@@ -693,17 +694,49 @@ body.page-id-2289.translatepress-en_US .title {
   transition: transform 0.6s ease;
 }
 
+.lineup-card-model-info {
+  margin-top: 25px;
+  font-size: 15px;
+  text-align: center;
+}
+
+.lineup-card-model-info-row {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 4px 0;
+}
+.lineup-card-model-info-row dt {
+  color: var(--primary-h);
+  font-weight: 400;
+}
+.lineup-card-model-info-row dt::after {
+  content: "：";
+}
+.lineup-card-model-info-row dd {
+  margin: 0;
+  font-weight: 500;
+}
+
 .lineup-card-dots {
-  position: relative;
-  margin-top: 15px;
   display: flex;
   justify-content: center;
-  gap: 0;
+  align-items: center;
+  gap: 6px;
 }
 
 .lineup-card-dot {
-  padding: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
   border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: 15px;
+  cursor: pointer;
 }
 .lineup-card-dot::before {
   content: "";
@@ -713,11 +746,7 @@ body.page-id-2289.translatepress-en_US .title {
   border: none;
   border-radius: 50%;
   background: var(--dot-color, #ccc);
-  cursor: pointer;
   transition: box-shadow 0.3s ease;
-}
-.lineup-card-dot:hover::before, .lineup-card-dot:focus::before {
-  background: var(--dot-color, #ccc);
 }
 .lineup-card-dot.active::before {
   box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--dot-color, var(--primary));
@@ -741,11 +770,13 @@ body.page-id-2289.translatepress-en_US .title {
   box-shadow: 0 0 0 2px #fff, 0 0 0 3px #d9d9d9;
 }
 
-.lineup-card-title {
-  margin-top: 25px;
-  font-size: 20px;
-  letter-spacing: 0.05em;
-  text-align: center;
+.lineup-card-dot-label {
+  color: #999;
+  transition: color 0.3s ease;
+}
+
+.lineup-card-dot.active .lineup-card-dot-label {
+  color: #333333;
 }
 
 .lineup-card-link {
@@ -753,14 +784,10 @@ body.page-id-2289.translatepress-en_US .title {
   transition: opacity 0.3s ease;
 }
 
-.lineup-card-desc {
-  margin-top: 10px;
-  line-height: 1.8;
-  text-align: center;
-}
-.lineup-card-desc p {
-  margin: 0;
-  word-break: break-all;
+.lineup-card-viewmore {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
 }
 
 .lineup-card-price {

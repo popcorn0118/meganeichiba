@@ -11,7 +11,7 @@
 /**
  * Define Constants
  */
-define( 'CHILD_THEME_ASTRA_CHILD_VERSION', '1.0.2' );
+define( 'CHILD_THEME_ASTRA_CHILD_VERSION', '1.0.3' );
 
 /**
  * Enqueue styles
@@ -62,6 +62,13 @@ function child_enqueue_brand_archive_scripts() {
 
     if ( ! is_tax( 'product_brand' ) ) {
         return;
+    }
+
+    // 商品卡片的 View More 用到 Font Awesome 5 圖示（fas fa-caret-right）
+    // 這個範本頁不是 Elementor 版面，Elementor 不會自動載入圖示字型，這裡呼叫它自己的方法補載入
+    // （'font-awesome' 這個 handle 是舊版 4.7.0，沒有 .fas 規則，載了也沒用；Icons_Manager::enqueue_shim() 才是實際帶 fas/far/fab 支援的 all.min.css）
+    if ( class_exists( '\Elementor\Icons_Manager' ) ) {
+        \Elementor\Icons_Manager::enqueue_shim();
     }
 
     wp_enqueue_script(
