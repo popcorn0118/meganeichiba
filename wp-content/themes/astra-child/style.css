@@ -665,7 +665,7 @@ body.page-id-2289.translatepress-en_US .title {
   transform: scale(1.05);
 }
 .lineup-card:hover .lineup-card-link {
-  opacity: 0.7;
+  opacity: 1;
 }
 .lineup-card:active, .lineup-card:focus {
   outline: none;
@@ -780,8 +780,7 @@ body.page-id-2289.translatepress-en_US .title {
 }
 
 .lineup-card-link {
-  color: inherit;
-  transition: opacity 0.3s ease;
+  color: #333333;
 }
 
 .lineup-card-viewmore {

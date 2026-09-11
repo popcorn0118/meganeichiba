@@ -249,7 +249,7 @@
         }
 
         .lineup-card-link {
-            opacity: .7;
+            opacity: 1;
         }
     }
     &:active, &:focus {
@@ -345,8 +345,8 @@
     }
 
     // 白底頁面：色票值為白色時（不分大小寫，含 #fff / #ffffff / white 等寫法）加上外框避免與背景融合
-    @each $white-value in '#fff;', '#ffffff;', 'white;' {
-        &[style*="--dot-color: #{$white-value}" i] {
+    @each $white-value in '#fff', '#ffffff', 'white' {
+        &[style*="--dot-color: #{$white-value};" i] {
             &::before {
                 border: 1px solid #d9d9d9;
             }
@@ -370,8 +370,8 @@
 }
 
 .lineup-card-link {
-    color: inherit;
-    transition: opacity .3s ease;
+    color: #333333;
+    // transition: opacity .3s ease;
 }
 
 // View More：沿用首頁 .brand-card-button 樣式，這裡只需要讓它在卡片內置中
